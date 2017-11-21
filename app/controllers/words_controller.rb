@@ -1,3 +1,4 @@
+require "byebug"
 class WordsController < ApplicationController
 
   def index
@@ -14,10 +15,21 @@ class WordsController < ApplicationController
     @word = Word.new(word_params)
     @word.packet_id = params[:packet_id]
     @packet = @word.packet
-    if @word.save
-      redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
+
+    word_with_the_same_polish_translation = Word.all.where("polish" => @word.polish)
+    if word_with_the_same_polish_translation.any? && !params[:confirm]
+      eng_synonyms = []
+      word_with_the_same_polish_translation.each do |word|
+        eng_synonyms << word.english
+      end
+      @word.english_synonyms = eng_synonyms.join(", ")
+      render "confirm"
     else
-      render "new"
+      if @word.save
+        redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
+      else
+        render "new"
+      end
     end
   end
 
