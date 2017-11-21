@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>English</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+  </head>
+
+  <body>
+    <% if user_signed_in? %>
+      <div class="side-panel">
+        You're logged in as <%= current_user.email %>
+        <button class="logout"><%= link_to('Logout', destroy_user_session_path, method: :delete) %></button>
+      </div>
+    <% end %>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <%= yield %>
+  </body>
+</html>

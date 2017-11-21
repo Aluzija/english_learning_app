@@ -1,0 +1,49 @@
+<div class="container-fluid">
+
+  <div class="container">
+    <h1>
+      Welcome to<br>
+      Private Dictionary
+    </h1>
+  </div>
+
+  <div class="container">
+    <p>
+      Here you can create your own polish-english dictionary based on series,
+      films and other english stuff you work with over day. Easy interface enable you
+      to add new words quickly with the least effort possible. Then the dictionary
+      itself make sure you have as much repetition of your words as you need to
+      memorize them.
+    </p>
+    <p>
+      You learn words added by youself so they're exackly on your level of english.
+      Not to easy nor to advanced.
+    </p>
+    <p>
+      So, turn on your favourite series of film and don't forget to add new english
+      words to your Private Dictionary.
+    </p>
+  </div>
+
+
+
+  <% if current_user %>
+    <div>
+      Hi <%= current_user.email %>.
+    </div>
+       <button id="enter-button"><%= link_to "Enter your Private Dictionary", user_packets_path(current_user.id) %></button>
+  <% else !user_signed_in? %>
+    <div class="introduction">
+      <p>
+        For now, to watch the content of webside you must log in.
+        In the future there will be sample content for you to test the functionality
+        without register.
+      </p>
+    </div>
+    <% if params[:sign_up] %>
+      <%= render "signup" %>
+    <% else %>
+      <%= render "login" %>
+    <% end %>
+  <% end %>
+</div>

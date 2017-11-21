@@ -1,0 +1,20 @@
+  <div>
+    <%= f.label :polish, "po polsku" %>
+    <%= f.text_field :polish %>
+    <%= f.label :polish_synonyms, "polskie synonimy" %>
+    <%= f.text_field :polish_synonyms %>
+  </div>
+  <div>
+    <%= f.label :english, "po angielsku" %>
+    <%= f.text_field :english %>
+    <%= f.label :english_synonyms, "angielskie synonimy" %>
+    <%= f.text_field :english_synonyms %>
+  </div>
+  <div>
+    <%= f.label :sample_sentence, "przykładowe zdanie" %>
+    <%= f.text_field :sample_sentence %>
+  </div>
+  <div>
+    <%= f.submit order %>
+    <%= link_to "Anuluj", user_packet_words_path(params[:user_id], params[:packet_id]) %>
+  </div>

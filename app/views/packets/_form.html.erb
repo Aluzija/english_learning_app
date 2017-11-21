@@ -1,0 +1,20 @@
+<div id="packet_form">
+  <%#= render partial: "shared/errors", locals: { model: @packet } %>
+  <%= form_for @packet, url: user_packets_path(params[:user_id]) do |f| %>
+    <%= f.label :name, "nazwa paczki" %>
+    <%#= @packet.errors[:name].empty? ? nil : @packet.errors[:name] %>
+    <%= @packet.error(:name) %>
+    <%# if @packet.errors[:name] %>
+      <%#= @packet.errors[:name] %>
+    <%# end %>
+    <%= f.text_field :name %>
+    <%= f.submit "dodaj paczkę" %>
+    <%= link_to "Anuluj", "#", onclick: "hide_packet_form()" %>
+  <% end %>
+</div>
+
+<% if @packet.errors.any? %>
+  <script type="text/javascript">
+    show_packet_form();
+  </script>
+<% end %>

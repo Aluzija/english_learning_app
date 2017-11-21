@@ -1,0 +1,28 @@
+<div class="tip">
+  Tutaj możesz stworzyć paczkę słówek. Ze względu na wygodę uczenia dobrze aby pojedyncza paczka nie była
+  wieksza niż 500 słówek.
+</div>
+<div>
+  Wybierz paczkę słówek, na której chcesz pracować albo <%= link_to "utwórz nową", "#", onclick: "show_packet_form()" %>.
+</div>
+<%= render "form" %>
+
+<% if @user.packets.any? %>
+  <table>
+    <tr>
+      <th>Lp</th>
+      <th>Nazwa</th>
+      <th>Akcja</th>
+    </tr>
+    <% @user.packets.each_with_index do |packet, index| %>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%= packet.name %></td>
+      <td><%= link_to "usuń", user_packet_path(params[:user_id], id: packet.id), method: "delete", data: { confirm: "Are you sure you want delete this packet?" } %></td>
+      <td><%= link_to "wejdź", user_packet_words_path(params[:user_id], packet_id: packet.id) %></td>
+    </tr>
+    <% end %>
+  </table>
+<% else %>
+  You have no packets yet.
+<% end %>
