@@ -3,4 +3,8 @@ class Word < ApplicationRecord
 
   validates :polish, presence: true
   validates :english, presence: true
+
+  def words_same_polish_meaning
+    Word.all.where("polish" => self.polish)
+  end
 end
