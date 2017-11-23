@@ -15,19 +15,28 @@ class WordsController < ApplicationController
     @word.packet_id = params[:packet_id]
     @packet = @word.packet
 
-    eng_synonyms = @word.words_same_polish_meaning
-    if eng_synonyms.any? && !params[:confirm]
-      eng_synonyms = eng_synonyms.map { |word| word.english }
+    other_words = @word.words_same_polish_meaning
+    if other_words.any? && !params[:confirm]
+      eng_synonyms = other_words.map { |word| word.english }
+      eng_synonyms << @word.english_synonyms if @word.english_synonyms
       @word.english_synonyms = eng_synonyms.join(", ")
       render "confirm"
-
     else
-      if @word.save
+      if @word.valid?
+        if params[:confirm]
+          other_words = @word.words_same_polish_meaning
+          other_words.each do |word|
+            word.english_synonyms = (word.english_synonyms + @word.english).split.join(", ")
+            word.save
+          end
+        end
+        @word.save
         redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
       else
         render "new"
       end
     end
+
   end
 
   def destroy
