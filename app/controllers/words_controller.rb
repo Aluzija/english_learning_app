@@ -1,3 +1,5 @@
+require "byebug"
+
 class WordsController < ApplicationController
 
   def index
@@ -14,27 +16,35 @@ class WordsController < ApplicationController
     @word = Word.new(word_params)
     @word.packet_id = params[:packet_id]
     @packet = @word.packet
-
-    other_words = @word.words_same_polish_meaning
-    if other_words.any? && !params[:confirm]
+    other_words = @word.words_english_synonyms
+    if other_words.any? && to_boolean(params[:confirm]) == false
       eng_synonyms = other_words.map { |word| word.english }
-      eng_synonyms << @word.english_synonyms if @word.english_synonyms
+      eng_synonyms << @word.english_synonyms if !@word.english_synonyms.empty?
       @word.english_synonyms = eng_synonyms.join(", ")
-      render "confirm"
-    else
-      if @word.valid?
-        if params[:confirm]
-          other_words = @word.words_same_polish_meaning
-          other_words.each do |word|
-            word.english_synonyms = (word.english_synonyms + @word.english).split.join(", ")
-            word.save
-          end
-        end
-        @word.save
-        redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
-      else
-        render "new"
+      if render "confirm"
+
       end
+
+    # else
+    #   if @word.valid?
+    #     if params[:confirm]
+    #       other_words = @word.words_same_polish_meaning
+    #       other_words.each do |word|
+    #         word.english_synonyms = (word.english_synonyms + @word.english).split.join(", ")
+    #         word.save
+    #       end
+    #     end
+    #     @word.save
+    #     redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
+    #   else
+    #     render "new"
+    #   end
+    # end
+
+    elsif @word.save
+      redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
+    else
+      render "new"
     end
 
   end

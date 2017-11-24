@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
     user_packets_path(current_user.id)
   end
 
+  def to_boolean(str)
+    str == "true"
+  end
+
 end

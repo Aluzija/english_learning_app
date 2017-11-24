@@ -21,7 +21,7 @@ Jesteś aktualnie w paczce słówek: <%= @packet.name %>
       <td><input onclick='responsiveVoice.speak("<%= word.english %>");' type='button' value='🔊 Play' /></td>
       <td>
         <%= link_to "edytuj", edit_user_packet_word_path(params[:user_id], params[:packet_id], id: word.id) %>
-        <%= link_to "usuń", user_packet_word_path(params[:user_id], params[:packet_id], id: word.id), method: "delete" %>
+        <%= link_to "usuń", user_packet_word_path(params[:user_id], params[:packet_id], id: word.id), method: "delete", data: { confirm: "Jesteś pewien, że chcesz usunąć słowo z paczki?" } %>
       </td>
     </tr>
     <% end %>

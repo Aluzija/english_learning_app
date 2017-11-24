@@ -3,8 +3,10 @@ class Word < ApplicationRecord
 
   validates :polish, presence: true
   validates :english, presence: true
+  validates :polish, uniqueness: { scope: "english" }
 
-  def words_same_polish_meaning
+  def words_english_synonyms
     Word.all.where("polish" => self.polish)
   end
+
 end
