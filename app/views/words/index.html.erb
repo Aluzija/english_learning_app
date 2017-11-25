@@ -5,20 +5,20 @@ Jesteś aktualnie w paczce słówek: <%= @packet.name %>
 <% if @packet.words.any? %>
   <table>
     <tr>
-      <th>polski</th>
-      <th> polskie synonimy</th>
-      <th>angielski</th>
+      <th><%= link_to "angielski", user_packet_words_path(params[:user_id], params[:packet_id], order: "english")%></th>
+      <th><%= link_to "polski", user_packet_words_path(params[:user_id], params[:packet_id], order: "polish")%></th>
       <th>angielskie synonimy</th>
       <th>dźwięk</th>
+      <th> polskie synonimy</th>
       <th>akcja</th>
     </tr>
-    <% @packet.words.each do |word| %>
+    <% @words.each do |word| %>
     <tr>
-      <td><%= word.polish %></td>
-      <td><%= word.polish_synonyms %></td>
       <td><%= word.english %></td>
+      <td><%= word.polish %></td>
       <td><%= word.english_synonyms %></td>
       <td><input onclick='responsiveVoice.speak("<%= word.english %>");' type='button' value='🔊 Play' /></td>
+      <td><%= word.polish_synonyms %></td>
       <td>
         <%= link_to "edytuj", edit_user_packet_word_path(params[:user_id], params[:packet_id], id: word.id) %>
         <%= link_to "usuń", user_packet_word_path(params[:user_id], params[:packet_id], id: word.id), method: "delete", data: { confirm: "Jesteś pewien, że chcesz usunąć słowo z paczki?" } %>

@@ -1,10 +1,11 @@
 require "byebug"
-
 class WordsController < ApplicationController
 
   def index
+    @order = params[:order] || "english"
     user = User.find(params[:user_id])
     @packet = user.packets.find(params[:packet_id])
+    @words = @packet.words.order(@order)
   end
 
   def new
@@ -16,15 +17,29 @@ class WordsController < ApplicationController
     @word = Word.new(word_params)
     @word.packet_id = params[:packet_id]
     @packet = @word.packet
-    other_words = @word.words_english_synonyms
-    if other_words.any? && to_boolean(params[:confirm]) == false
-      eng_synonyms = other_words.map { |word| word.english }
-      eng_synonyms << @word.english_synonyms if !@word.english_synonyms.empty?
-      @word.english_synonyms = eng_synonyms.join(", ")
-      if render "confirm"
 
+    @other_words = @word.words_english_synonyms
+    # byebug
+    if @word.valid?
+      if @other_words.any? && to_boolean(params[:confirm]) == false
+        eng_synonyms = @other_words.map { |word| word.english }
+        eng_synonyms << @word.english_synonyms if !@word.english_synonyms.empty?
+        @word.english_synonyms = eng_synonyms.join(", ")
+        render "confirm"
+      elsif to_boolean(params[:confirm])
+        @other_words.each do |word|
+          eng_synonyms = []
+          eng_synonyms << word.english_synonyms if !word.english_synonyms.empty?
+          eng_synonyms << @word.english
+          word.english_synonyms = eng_synonyms.join(", ")
+          word.save
+        end
+        @word.save
+        redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
       end
-
+    else
+      render "new"
+    end
     # else
     #   if @word.valid?
     #     if params[:confirm]
@@ -40,12 +55,6 @@ class WordsController < ApplicationController
     #     render "new"
     #   end
     # end
-
-    elsif @word.save
-      redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
-    else
-      render "new"
-    end
 
   end
 
