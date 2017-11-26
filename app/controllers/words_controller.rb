@@ -37,6 +37,10 @@ class WordsController < ApplicationController
         @word.save
         redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
       end
+      if !@other_words.any?
+        @word.save
+        redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
+      end
     else
       render "new"
     end
