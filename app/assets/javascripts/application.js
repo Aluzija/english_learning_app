@@ -17,6 +17,14 @@
 //= require bootstrap-sprockets
 
 //= require_tree .
+window.addEventListener("load", function() {
+  var links = document.getElementsByClassName("show_or_hide_form");
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener("click", function(event) {
+      event.preventDefault();
+    });
+  }
+});
 
 function show_form(object)
 {
