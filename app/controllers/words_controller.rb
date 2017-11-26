@@ -1,3 +1,4 @@
+require "byebug"
 class WordsController < ApplicationController
 
   def index
@@ -51,8 +52,7 @@ class WordsController < ApplicationController
       if word.english_synonyms.include?(@word.english)
         eng_synonyms = []
         eng_synonyms << word.english_synonyms
-        eng_synonyms = eng_synonyms.join.partition(", ")
-        eng_synonyms.delete(", ")
+        eng_synonyms = eng_synonyms.join.split(", ")
         eng_synonyms.delete(@word.english)
         word.english_synonyms = eng_synonyms.join(", ")
         word.save
