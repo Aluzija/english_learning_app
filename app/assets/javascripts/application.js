@@ -18,12 +18,14 @@
 
 //= require_tree .
 
-function show_packet_form()
+function show_form(object)
 {
-  document.getElementById("packet_form").style.display = 'block';
+  var id = object.id;
+  document.getElementById(id).style.display = 'block';
 }
 
-function hide_packet_form()
+function hide_form(object, event)
 {
-  document.getElementById("packet_form").style.display = 'none';
+  var id = object.id;
+  document.getElementById(id).style.display = 'none';
 }

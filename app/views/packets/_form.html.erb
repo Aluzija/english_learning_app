@@ -9,7 +9,7 @@
     <%# end %>
     <%= f.text_field :name %>
     <%= f.submit "dodaj paczkę" %>
-    <%= link_to "Anuluj", "#", onclick: "hide_packet_form()" %>
+    <%= link_to "Anuluj", "#", onclick: "hide_form(#{"packet_form"})" %>
   <% end %>
 </div>
 

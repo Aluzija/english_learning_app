@@ -26,8 +26,14 @@ Jesteś aktualnie w paczce słówek: <%= @packet.name %>
     </tr>
     <% end %>
   </table>
-  <button><%= link_to "ucz się nowych słowek(w wybranym przebiegu)", '#' %></button>
-  <button><%= link_to "powtórki na dziś(w wybranym przebiegu)", '#' %></button>
+  <button><%= link_to "ucz się nowych słowek", '#', onclick: "show_form(#{"how_many_form"})" %></button>
+  <%= form_tag "#", id: "how_many_form" do %>
+    <%= label_tag :how_many, "Jak dużo?" %>
+    <%= text_field_tag :how_many %>
+    <%= submit_tag "Do nauki!" %>
+    <%= link_to "Anuluj", "#", onclick: "hide_form(#{"how_many_form"})" %>
+  <% end %>
+  <button><%= link_to "powtórki na dziś", '#' %></button>
 <% else %>
   Paczka <%= @packet.name %> nie ma jeszcze żadnych słów.
 <% end %>
