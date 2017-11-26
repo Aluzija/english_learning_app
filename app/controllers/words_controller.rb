@@ -19,7 +19,6 @@ class WordsController < ApplicationController
     @packet = @word.packet
 
     @other_words = @word.words_english_synonyms
-    # byebug
     if @word.valid?
       if @other_words.any? && to_boolean(params[:confirm]) == false
         eng_synonyms = @other_words.map { |word| word.english }
@@ -30,14 +29,13 @@ class WordsController < ApplicationController
         @other_words.each do |word|
           eng_synonyms = []
           eng_synonyms << word.english_synonyms if !word.english_synonyms.empty?
-          eng_synonyms << @word.english
+          eng_synonyms << @word.english if @word.english_synonyms.include?(word.english)
           word.english_synonyms = eng_synonyms.join(", ")
           word.save
         end
         @word.save
         redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
-      end
-      if !@other_words.any?
+      elsif !@other_words.any?
         @word.save
         redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
       end
