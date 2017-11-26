@@ -1,4 +1,3 @@
-require "byebug"
 class WordsController < ApplicationController
 
   def index
@@ -42,27 +41,24 @@ class WordsController < ApplicationController
     else
       render "new"
     end
-    # else
-    #   if @word.valid?
-    #     if params[:confirm]
-    #       other_words = @word.words_same_polish_meaning
-    #       other_words.each do |word|
-    #         word.english_synonyms = (word.english_synonyms + @word.english).split.join(", ")
-    #         word.save
-    #       end
-    #     end
-    #     @word.save
-    #     redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
-    #   else
-    #     render "new"
-    #   end
-    # end
 
   end
 
   def destroy
-    word = Word.find(params[:id])
-    word.destroy
+    @word = Word.find(params[:id])
+    other_words = @word.words_english_synonyms
+    other_words.each do |word|
+      if word.english_synonyms.include?(@word.english)
+        eng_synonyms = []
+        eng_synonyms << word.english_synonyms
+        eng_synonyms = eng_synonyms.join.partition(", ")
+        eng_synonyms.delete(", ")
+        eng_synonyms.delete(@word.english)
+        word.english_synonyms = eng_synonyms.join(", ")
+        word.save
+      end
+    end
+    @word.destroy
     redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
   end
 
