@@ -37,3 +37,8 @@ function hide_form(object, event)
   var id = object.id;
   document.getElementById(id).style.display = 'none';
 }
+
+window.addEventListener("load", function() {
+  var play = document.getElementById("autoplay");
+  play.onclick(event)
+});
