@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171119140611) do
+ActiveRecord::Schema.define(version: 20171128175449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "learning_sessions", force: :cascade do |t|
+    t.text "words_ids", null: false
+    t.text "good_answers", default: "---\n1: []\n2: []\n3: []\n4: []\n5: []\n", null: false
+    t.text "wrong_answers", default: "---\n1: []\n2: []\n3: []\n4: []\n5: []\n", null: false
+    t.boolean "completed", default: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_learning_sessions_on_user_id"
+  end
 
   create_table "packets", force: :cascade do |t|
     t.string "name", null: false
@@ -46,10 +55,14 @@ ActiveRecord::Schema.define(version: 20171119140611) do
     t.string "sample_sentence"
     t.integer "repetition", default: 0
     t.integer "packet_id", null: false
+    t.bigint "learning_session_id"
     t.index ["english"], name: "index_words_on_english"
+    t.index ["learning_session_id"], name: "index_words_on_learning_session_id"
     t.index ["packet_id"], name: "index_words_on_packet_id"
     t.index ["polish"], name: "index_words_on_polish"
   end
 
+  add_foreign_key "learning_sessions", "users"
   add_foreign_key "packets", "users"
+  add_foreign_key "words", "learning_sessions"
 end

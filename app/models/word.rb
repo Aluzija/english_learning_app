@@ -9,4 +9,8 @@ class Word < ApplicationRecord
     Word.all.where("polish" => self.polish)
   end
 
+  def similar
+    Word.where("english ilike ?", "#{self.english[0]}%").limit(3)
+  end
+
 end

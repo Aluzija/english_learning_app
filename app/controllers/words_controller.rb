@@ -1,4 +1,3 @@
-require "byebug"
 class WordsController < ApplicationController
 
   def index

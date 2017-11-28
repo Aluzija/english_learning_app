@@ -26,8 +26,8 @@ Jesteś aktualnie w paczce słówek: <%= @packet.name %>
     </tr>
     <% end %>
   </table>
-  <button><%= link_to "ucz się nowych słowek", '#', onclick: "show_form(#{"how_many_form"})", class: "show_or_hide_form" %></button>
-  <%= form_tag "#", id: "how_many_form" do %>
+  <button><%= link_to "ucz się nowych słowek", "#", onclick: "show_form(#{"how_many_form"})", class: "show_or_hide_form" %></button>
+  <%= form_tag user_packet_words_learning_session_index_path(params[:user_id], params[:packet_id]), id: "how_many_form"  do %>
     <%= label_tag :how_many, "Jak dużo?" %>
     <%= text_field_tag :how_many %>
     <%= submit_tag "Do nauki!" %>

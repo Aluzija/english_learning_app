@@ -9,6 +9,13 @@ Rails.application.routes.draw do
   resources :users, only: :index do
     resources :packets, only: [:index, :create, :destroy] do
       resources :words, except: :show
+      namespace :words do
+        resources :learning_session, only: :create do
+          member do
+            get "question_type_1"
+          end
+        end
+      end
     end
   end
 

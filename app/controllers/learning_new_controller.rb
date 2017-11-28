@@ -1,3 +1,0 @@
-class LearningNewController < ApplicationController
-
-end
