@@ -1,3 +1,4 @@
+require "byebug"
 class Word < ApplicationRecord
   belongs_to :packet
 
@@ -10,7 +11,11 @@ class Word < ApplicationRecord
   end
 
   def similar
-    Word.where("english ilike ?", "#{self.english[0]}%").limit(3)
+    words = Word.where("id <> ? AND english ilike ?", id, "#{self.english[0]}%").limit(3)
+    if words.length < 3
+      how_many = 3 - words.length
+      words += Word.all.where("id <> ?", id).limit(how_many)
+    end
   end
 
 end

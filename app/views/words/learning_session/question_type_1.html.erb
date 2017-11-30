@@ -1,2 +1,13 @@
 <h2>Co usłyszałeś?</h2>
-<input onclick='responsiveVoice.speak("<%= @word.english %>");' type='button' value='🔊 Play' id='autoplay' />
+<input onclick='responsiveVoice.speak("<%= @answer.english %>");' type='button' value='🔊 Play' id='autoplay' />
+<%#= radio_button_tag %>
+<%= form_tag "#", method: "POST" do %>
+  <% @words.each do |word| %>
+    <%= radio_button_tag :answer, word.english %>
+    <%= word.english %>
+    <%#= word.english %>
+    <%#= word == @answer ? "correct" : "incorrect" %>
+    <br />
+  <% end %>
+  <%= submit_tag "Sprawdź" %>
+<% end %>

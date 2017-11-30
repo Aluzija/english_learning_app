@@ -4,17 +4,19 @@ class Words::LearningSessionController < ApplicationController
   def create
     @words_to_learn = Word.order(:id).limit(params[:how_many])
     words_ids = Array.new(@words_to_learn.map { |word| word.id })
-    @session = Words::LearningSession.new(words_ids: words_ids, user_id: params[:user_id])
+    @session = Words::LearningSession.new(words_ids: words_ids, user_id: current_user.id)
     @session.save
-    redirect_to question_type_1_user_packet_words_learning_session_path(id: @session.id, index: 0)
+    redirect_to question_type_1_packet_words_learning_session_path(id: @session.id, index: 0)
   end
 
 
   def question_type_1
     @session = Words::LearningSession.find(params[:id])
-    @words = @session.words
-    @word = @words[params[:index].to_i]
-    @similar_words = @word.similar
+    @answer = @session.words[params[:index].to_i]
+    @similar_words = @answer.similar
+    @words = [@answer, *@similar_words]
+    # @words.concat(@similar_words)
+    @words.shuffle!
   end
 
   private

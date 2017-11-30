@@ -12,7 +12,3 @@ class Words::LearningSession < ApplicationRecord
   end
 
 end
-
-# words = words_ids.map do |id|
-#   Word.find(id)
-# end

@@ -7,13 +7,15 @@ Rails.application.routes.draw do
   # end
   root "homepage#index"
   resources :users, only: :index do
-    resources :packets, only: [:index, :create, :destroy] do
-      resources :words, except: :show
-      namespace :words do
-        resources :learning_session, only: :create do
-          member do
-            get "question_type_1"
-          end
+    resources :packets, only: :index
+  end
+  resources :packets, only: [:create, :destroy] do
+    resources :words, except: :show
+    namespace :words do
+      resources :learning_session, only: :create do
+        member do
+          get "question_type_1"
+          post "learning_manager"
         end
       end
     end

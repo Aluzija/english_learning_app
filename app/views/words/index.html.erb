@@ -1,12 +1,12 @@
 Jesteś aktualnie w paczce słówek: <%= @packet.name %>
-<button><%= link_to "Zmień paczkę", user_packets_path(params[:user_id]) %></button><br>
+<button><%= link_to "Zmień paczkę", user_packets_path(current_user) %></button><br>
 
 <%#= radio_button_tag  %>
 <% if @packet.words.any? %>
   <table>
     <tr>
-      <th><%= link_to "angielski", user_packet_words_path(params[:user_id], params[:packet_id], order: "english")%></th>
-      <th><%= link_to "polski", user_packet_words_path(params[:user_id], params[:packet_id], order: "polish")%></th>
+      <th><%= link_to "angielski", packet_words_path(params[:packet_id], order: "english")%></th>
+      <th><%= link_to "polski", packet_words_path(params[:packet_id], order: "polish")%></th>
       <th>angielskie synonimy</th>
       <th>dźwięk</th>
       <th> polskie synonimy</th>
@@ -20,14 +20,14 @@ Jesteś aktualnie w paczce słówek: <%= @packet.name %>
       <td><input onclick='responsiveVoice.speak("<%= word.english %>");' type='button' value='🔊 Play' /></td>
       <td><%= word.polish_synonyms %></td>
       <td>
-        <%= link_to "edytuj", edit_user_packet_word_path(params[:user_id], params[:packet_id], id: word.id) %>
-        <%= link_to "usuń", user_packet_word_path(params[:user_id], params[:packet_id], id: word.id), method: "delete", data: { confirm: "Jesteś pewien, że chcesz usunąć słowo z paczki?" } %>
+        <%= link_to "edytuj", edit_packet_word_path(params[:packet_id], id: word.id) %>
+        <%= link_to "usuń", packet_word_path(params[:packet_id], id: word.id), method: "delete", data: { confirm: "Jesteś pewien, że chcesz usunąć słowo z paczki?" } %>
       </td>
     </tr>
     <% end %>
   </table>
   <button><%= link_to "ucz się nowych słowek", "#", onclick: "show_form(#{"how_many_form"})", class: "show_or_hide_form" %></button>
-  <%= form_tag user_packet_words_learning_session_index_path(params[:user_id], params[:packet_id]), id: "how_many_form"  do %>
+  <%= form_tag packet_words_learning_session_index_path(params[:packet_id]), id: "how_many_form"  do %>
     <%= label_tag :how_many, "Jak dużo?" %>
     <%= text_field_tag :how_many %>
     <%= submit_tag "Do nauki!" %>
@@ -37,4 +37,4 @@ Jesteś aktualnie w paczce słówek: <%= @packet.name %>
 <% else %>
   Paczka <%= @packet.name %> nie ma jeszcze żadnych słów.
 <% end %>
-<button><%= link_to "dodaj słowo", new_user_packet_word_path(params[:user_id], params[:packet_id]) %></button>
+<button><%= link_to "dodaj słowo", new_packet_word_path(params[:packet_id]) %></button>

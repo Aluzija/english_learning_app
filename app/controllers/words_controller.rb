@@ -2,7 +2,7 @@ class WordsController < ApplicationController
 
   def index
     @order = params[:order] || "english"
-    user = User.find(params[:user_id])
+    user = current_user
     @packet = user.packets.find(params[:packet_id])
     @words = @packet.words.order(@order)
   end
@@ -33,10 +33,10 @@ class WordsController < ApplicationController
           word.save
         end
         @word.save
-        redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
+        redirect_to packet_words_path(params[:packet_id])
       elsif !@other_words.any?
         @word.save
-        redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
+        redirect_to packet_words_path(params[:packet_id])
       end
     else
       render "new"
@@ -58,7 +58,7 @@ class WordsController < ApplicationController
       end
     end
     @word.destroy
-    redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
+    redirect_to packet_words_path(params[:packet_id])
   end
 
   def edit
@@ -68,7 +68,7 @@ class WordsController < ApplicationController
   def update
     @word = Word.find(params[:id])
     if @word.update(word_params)
-      redirect_to user_packet_words_path(params[:user_id], params[:packet_id])
+      redirect_to packet_words_path(params[:packet_id])
     else
       render "edit"
     end
@@ -79,4 +79,5 @@ class WordsController < ApplicationController
   def word_params
     params.require(:word).permit(:polish, :english, :polish_synonyms, :english_synonyms, :sample_sentence)
   end
+
 end
