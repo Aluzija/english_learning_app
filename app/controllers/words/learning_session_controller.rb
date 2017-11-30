@@ -6,7 +6,7 @@ class Words::LearningSessionController < ApplicationController
     words_ids = Array.new(@words_to_learn.map { |word| word.id })
     @session = Words::LearningSession.new(words_ids: words_ids, user_id: current_user.id)
     @session.save
-    redirect_to question_type_1_packet_words_learning_session_path(id: @session.id, index: 0)
+    redirect_to question_type_1_words_learning_session_path(id: @session.id, index: 0)
   end
 
 

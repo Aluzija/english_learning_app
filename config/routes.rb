@@ -11,12 +11,12 @@ Rails.application.routes.draw do
   end
   resources :packets, only: [:create, :destroy] do
     resources :words, except: :show
-    namespace :words do
-      resources :learning_session, only: :create do
-        member do
-          get "question_type_1"
-          post "learning_manager"
-        end
+  end
+  namespace :words do
+    resources :learning_session, only: :create do
+      member do
+        get "question_type_1"
+        post "learning_manager"
       end
     end
   end
