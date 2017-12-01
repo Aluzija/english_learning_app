@@ -42,3 +42,36 @@ window.addEventListener("load", function() {
   var play = document.getElementById("autoplay");
   play.onclick(event)
 });
+
+window.addEventListener("load", function() {
+  var button = document.getElementById("js_activation_button")
+  button.addEventListener("click", function(event) {
+    event.preventDefault();
+  });
+});
+
+
+
+function check()
+{
+  answer = document.getElementById("answer");
+  var guesses = document.getElementsByName("guess");
+  var info = document.getElementById("feedback_info");
+  var next_button = document.getElementsByClassName("next_after_check")[0];
+  var fieldset = document.getElementById("fieldset");
+  var correctness = document.getElementById("correctness");
+  for(var i = 0; i < guesses.length; i++) {
+    if(guesses[i].checked) {
+      if(guesses[i].value === answer.value) { info.innerHTML = "Dobrze!"; correctness.value = true; }
+      else { info.innerHTML = "Błąd. Poprawna odpowiedź: " + answer.value; correctness.value = false; }
+    }
+    next_button.style.display = 'block';
+    guesses[i].disabled = true;
+  }
+}
+
+// window.addEventListener("load", function() {
+//   document.addEventListener("click", check {
+//
+//   });
+// });

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :learning_session, only: :create do
       member do
         get "question_type_1"
-        post "learning_manager"
+        get "manager"
       end
     end
   end

@@ -23,95 +23,51 @@
   display: none;
 }
 
+.next_after_check {
+  display: none;
+}
+
 // #container {
 //   width: auto;
 //   margin-left: 50px;
 //   margin-right: 50px;
 // }
 
-body {
-  background-color: #ffff80;
-  margin: auto;
-  padding: inherit;
-}
-
-.side-panel {
-  background-color: #ffff33;
-  padding: 10px 10px;
-  width: 400px;
-  border: 2px solid #ff9900;
-}
-a {
-  color: black;
-}
-
-a:hover {
-  color: inherit;
-}
-
-button {
-  background-color: #ff9900;
-  border-radius: 30%;
-}
-
-button:hover {
-  background-color: #e68a00;
-}
-
-#enter-button {
-  padding: 20px 40px;
-  margin: auto;
-}
-
-button.logout {
-  padding: 5px 10px;
-  transition-duration: 0.5s;
-}
-// #container
-// {
-//   width: 700px;
-//   height: 800px;
-//   margin-left: auto;
-//   margin-right: auto;
-//   background-color: #98FDFF;
+// body {
+//   background-color: #ffff80;
+//   margin: auto;
+//   padding: inherit;
 // }
 //
-// .title
-// {
-//   margin-left: auto;
-//   margin-right: auto;
-//   height: 150px;
-//   width: 500px;
-//   background-color: #50C8FC;
-//   color: #2455F3;
-//   text-align: center;
-//   padding-top: 20px;
+// .side-panel {
+//   background-color: #ffff33;
+//   padding: 10px 10px;
+//   width: 400px;
+//   border: 2px solid #ff9900;
+// }
+// a {
+//   color: black;
 // }
 //
-// .content_background
-// {
-//   background-color: #51DDFF;
-//   width: 500px;
-//   margin-left: auto;
-//   margin-right: auto;
-//   height: 650px;
+// a:hover {
+//   color: inherit;
 // }
 //
-// .introduction
-// {
-//
-//   padding-top: 25px;
-//   padding-left: 20px;
-//   padding-right: 20px;
-//   text-align: justify;
+// button {
+//   background-color: #ff9900;
+//   border-radius: 30%;
 // }
 //
-// h1
-// {
-//   text-align: center;
+// button:hover {
+//   background-color: #e68a00;
 // }
-
-// .title
-// {
-//   font-family: 'Josefin Sans', sans-serif;
+//
+// #enter-button {
+//   padding: 20px 40px;
+//   margin: auto;
+// }
+//
+// button.logout {
+//   padding: 5px 10px;
+//   transition-duration: 0.5s;
 // }

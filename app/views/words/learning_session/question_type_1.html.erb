@@ -1,13 +1,21 @@
 <h2>Co usłyszałeś?</h2>
 <input onclick='responsiveVoice.speak("<%= @answer.english %>");' type='button' value='🔊 Play' id='autoplay' />
 <%#= radio_button_tag %>
-<%= form_tag "#", method: "POST" do %>
+<%= form_tag manager_words_learning_session_path(params[:id]), method: "GET" do %>
   <% @words.each do |word| %>
-    <%= radio_button_tag :answer, word.english %>
+    <%= radio_button_tag :guess, word.english %>
     <%= word.english %>
     <%#= word.english %>
     <%#= word == @answer ? "correct" : "incorrect" %>
     <br />
   <% end %>
-  <%= submit_tag "Sprawdź" %>
+  <%= hidden_field_tag :index, params[:index] %>
+  <%= hidden_field_tag :answer, @answer.english %>
+  <%= hidden_field_tag :type, params[:type] %>
+  <%= hidden_field_tag :correctness, "" %>
+
+  <%#= hidden_field_tag :correctness %>
+  <%= button_tag "sprawdź", onclick: "check()", id: "js_activation_button" %>
+  <p id="feedback_info"> <p>
+<%= submit_tag "Dalej", class: "next_after_check" %>
 <% end %>
