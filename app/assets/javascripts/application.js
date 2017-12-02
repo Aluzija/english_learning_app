@@ -40,7 +40,9 @@ function hide_form(object, event)
 
 window.addEventListener("load", function() {
   var play = document.getElementById("autoplay");
-  play.onclick(event)
+  if (play != null) {
+    play.onclick(event)
+  }
 });
 
 window.addEventListener("load", function() {
@@ -50,15 +52,29 @@ window.addEventListener("load", function() {
   });
 });
 
-
-
-function check()
-{
-  answer = document.getElementById("answer");
+function check_type_1() {
+  var answer = document.getElementById("answer");
   var guesses = document.getElementsByName("guess");
   var info = document.getElementById("feedback_info");
   var next_button = document.getElementsByClassName("next_after_check")[0];
-  var fieldset = document.getElementById("fieldset");
+  var correctness = document.getElementById("correctness");
+  var after_guess_info = document.getElementById("after_guess")
+  for(var i = 0; i < guesses.length; i++) {
+    if(guesses[i].checked) {
+      if(guesses[i].value === answer.value) { info.innerHTML = "Dobrze!"; correctness.value = true; }
+      else { info.innerHTML = "Błąd. Poprawna odpowiedź: " + answer.value; correctness.value = false; }
+    }
+    after_guess_info.style.display = 'block';
+    next_button.style.display = 'block';
+    guesses[i].disabled = true;
+  }
+}
+
+function check_type_2() {
+  var answer = document.getElementById("answer");
+  var guesses = document.getElementsByName("guess");
+  var info = document.getElementById("feedback_info");
+  var next_button = document.getElementsByClassName("next_after_check")[0];
   var correctness = document.getElementById("correctness");
   for(var i = 0; i < guesses.length; i++) {
     if(guesses[i].checked) {
@@ -69,6 +85,48 @@ function check()
     guesses[i].disabled = true;
   }
 }
+
+function check_type_3() {
+  var answer = document.getElementById("answer");
+  var guesses = document.getElementsByName("guess");
+  var info = document.getElementById("feedback_info");
+  var next_button = document.getElementsByClassName("next_after_check")[0];
+  var correctness = document.getElementById("correctness");
+  for(var i = 0; i < guesses.length; i++) {
+    if(guesses[i].checked) {
+      responsiveVoice.speak(answer.value);
+      if(guesses[i].value === answer.value) { info.innerHTML = "Dobrze!"; correctness.value = true; }
+      else { info.innerHTML = "Błąd. Poprawna odpowiedź: " + answer.value; correctness.value = false; }
+    }
+    next_button.style.display = 'block';
+    guesses[i].disabled = true;
+  }
+}
+
+function check_type_4() {
+  var answer = document.getElementById("answer");
+  var guess = document.getElementById("guess");
+  var info = document.getElementById("feedback_info");
+  var next_button = document.getElementsByClassName("next_after_check")[0];
+  var correctness = document.getElementById("correctness");
+  if(guess.value === answer.value) { info.innerHTML = "Dobrze!"; correctness.value = true; }
+  else { info.innerHTML = "Błąd. Poprawna odpowiedź: " + answer.value; correctness.value = false; }
+  next_button.style.display = 'block';
+  guesses[i].disabled = true;
+}
+
+function check_type_5() {
+  var answer = document.getElementById("answer");
+  var guess = document.getElementById("guess");
+  var info = document.getElementById("feedback_info");
+  var next_button = document.getElementsByClassName("next_after_check")[0];
+  var correctness = document.getElementById("correctness");
+  if(guess.value === answer.value) { info.innerHTML = "Dobrze!"; correctness.value = true; }
+  else { info.innerHTML = "Błąd. Poprawna odpowiedź: " + answer.value; correctness.value = false; }
+  next_button.style.display = 'block';
+  guesses[i].disabled = true;
+}
+
 
 // window.addEventListener("load", function() {
 //   document.addEventListener("click", check {

@@ -1,5 +1,5 @@
-<h2>Co usłyszałeś?</h2>
-<input onclick='responsiveVoice.speak("<%= @answer.english %>");' type='button' value='🔊 Play' id='autoplay' />
+<h2>Wybierz tłumaczenie</h2>
+<%= @answer.polish %>
 
 <%= form_tag manager_words_learning_session_path(params[:id]), method: "GET" do %>
   <% @words.each do |word| %>
@@ -11,8 +11,7 @@
   <%= hidden_field_tag :answer, @answer.english %>
   <%= hidden_field_tag :type, params[:type] %>
   <%= hidden_field_tag :correctness, "" %>
-  <%= button_tag "sprawdź", onclick: "check_type_1()", id: "js_activation_button" %>
+  <%= button_tag "sprawdź", onclick: "check_type_3()", id: "js_activation_button" %>
   <p id="feedback_info"></p>
-  <p id="after_guess">Po polsku: <%= @answer.polish %></p>
 <%= submit_tag "Dalej", class: "next_after_check" %>
 <% end %>

@@ -11,4 +11,9 @@ class Words::LearningSession < ApplicationRecord
     Word.find(arr)
   end
 
+  def self.packet(id)
+    word_id = find(id).words_ids[0]
+    Word.find(word_id).packet_id
+  end
+
 end
