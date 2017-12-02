@@ -1,4 +1,3 @@
-require "byebug"
 class Words::LearningSessionController < ApplicationController
   before_action :delete_uncompleted, only: :create
 

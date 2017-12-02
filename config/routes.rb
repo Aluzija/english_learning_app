@@ -10,8 +10,9 @@ Rails.application.routes.draw do
     resources :packets, only: :index
   end
   resources :packets, only: [:create, :destroy] do
-    resources :words, except: :show
+    resources :words, only: [:index, :create, :new]
   end
+  resources :words, only: [:edit, :update, :destroy]
   namespace :words do
     resources :learning_session, only: :create do
       member do

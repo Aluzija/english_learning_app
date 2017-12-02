@@ -1,3 +1,3 @@
-<%= form_for @word, url: packet_word_path(params[:packet_id], params[:id]) do |f| %>
+<%= form_for @word, url: word_path(params[:id]) do |f| %>
   <%= render partial: "form", locals: { order: "Edytuj słowo", f: f } %>
 <% end %>

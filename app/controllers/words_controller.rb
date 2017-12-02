@@ -58,7 +58,7 @@ class WordsController < ApplicationController
       end
     end
     @word.destroy
-    redirect_to packet_words_path(params[:packet_id])
+    redirect_to packet_words_path(@word.packet_id)
   end
 
   def edit
@@ -68,7 +68,7 @@ class WordsController < ApplicationController
   def update
     @word = Word.find(params[:id])
     if @word.update(word_params)
-      redirect_to packet_words_path(params[:packet_id])
+      redirect_to packet_words_path(@word.packet_id)
     else
       render "edit"
     end

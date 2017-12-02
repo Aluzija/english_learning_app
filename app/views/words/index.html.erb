@@ -20,8 +20,8 @@ Jesteś aktualnie w paczce słówek: <%= @packet.name %>
       <td><input onclick='responsiveVoice.speak("<%= word.english %>");' type='button' value='🔊 Play' /></td>
       <td><%= word.polish_synonyms %></td>
       <td>
-        <%= link_to "edytuj", edit_packet_word_path(params[:packet_id], id: word.id) %>
-        <%= link_to "usuń", packet_word_path(params[:packet_id], id: word.id), method: "delete", data: { confirm: "Jesteś pewien, że chcesz usunąć słowo z paczki?" } %>
+        <%= link_to "edytuj", edit_word_path(word.id) %>
+        <%= link_to "usuń", word_path(word.id), method: "delete", data: { confirm: "Jesteś pewien, że chcesz usunąć słowo z paczki?" } %>
       </td>
     </tr>
     <% end %>

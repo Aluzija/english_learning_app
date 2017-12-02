@@ -1,7 +1,7 @@
 Jesteś aktualnie w paczce słówek: <%= @packet.name %>
 
 <%= render partial: "shared/errors", locals: { model: @word } %>
-<%= form_for @word, url: user_packet_words_path(params[:user_id], params[:packet_id], confirm: true) do |f| %>
+<%= form_for @word, url: packet_words_path(params[:packet_id], confirm: true) do |f| %>
   <%#= f.hidden_field "foo", "1" %>
   <%= render partial: "form", locals: { order: "zatwierdź słowo", f: f } %>
 <% end %>
