@@ -14,6 +14,11 @@ Rails.application.routes.draw do
   end
   resources :words, only: [:edit, :update, :destroy]
   namespace :words do
+    resources :repetition, only: :index  do
+      member do
+        get "ask"
+      end
+    end
     resources :learning_session, only: :create do
       member do
         get "question_type_1"

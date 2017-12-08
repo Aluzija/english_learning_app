@@ -27,13 +27,21 @@ Jesteś aktualnie w paczce słówek: <%= @packet.name %>
     <% end %>
   </table>
   <button><%= link_to "ucz się nowych słowek", "#", onclick: "show_form(#{"how_many_form"})", class: "show_or_hide_form" %></button>
-  <%= form_tag words_learning_session_index_path id: "how_many_form"  do %>
-    <%= label_tag :how_many, "Jak dużo?" %>
-    <%= text_field_tag :how_many %>
-    <%= submit_tag "Do nauki!" %>
-    <%= link_to "Anuluj", "#", onclick: "hide_form(#{"how_many_form"})", class: "show_or_hide_form" %>
+  <div id="how_many_form">
+    <%= form_tag words_learning_session_index_path(packet_id: params[:packet_id]) do %>
+      <%= label_tag :how_many, "Jak dużo?" %>
+      <%= text_field_tag :how_many %>
+      <%= submit_tag "Do nauki!" %>
+      <%= link_to "Anuluj", "#", onclick: "hide_form(#{"how_many_form"})", class: "show_or_hide_form" %>
+    <% end %>
+  </div>
+  <% if @repetitions.any? %>
+    <% number = @repetitions.count %>
+  <% else %>
+    <% number = "brak" %>
+    <p id="disactivate"></p>
   <% end %>
-  <button><%= link_to "powtórki na dziś", '#' %></button>
+  <button><%= link_to "powtórki na dziś(#{number})", ask_words_repetition_path(@word_id), id: "repetition_button" %></button>
 <% else %>
   Paczka <%= @packet.name %> nie ma jeszcze żadnych słów.
 <% end %>

@@ -112,7 +112,6 @@ function check_type_4() {
   if(guess.value === answer.value) { info.innerHTML = "Dobrze!"; correctness.value = true; }
   else { info.innerHTML = "Błąd. Poprawna odpowiedź: " + answer.value; correctness.value = false; }
   next_button.style.display = 'block';
-  guesses[i].disabled = true;
 }
 
 function check_type_5() {
@@ -124,8 +123,19 @@ function check_type_5() {
   if(guess.value === answer.value) { info.innerHTML = "Dobrze!"; correctness.value = true; }
   else { info.innerHTML = "Błąd. Poprawna odpowiedź: " + answer.value; correctness.value = false; }
   next_button.style.display = 'block';
-  guesses[i].disabled = true;
 }
+
+function disactivate() {
+  var link = document.getElementById("repetition_button");
+  link.href = "javascript: void(0)";
+  link.style.color = 'grey';
+}
+
+window.addEventListener("load", function() {
+  if (document.getElementById("disactivate") != null) { disactivate(); }
+});
+
+
 
 
 // window.addEventListener("load", function() {

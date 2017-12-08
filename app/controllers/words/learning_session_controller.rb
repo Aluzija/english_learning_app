@@ -2,13 +2,12 @@ class Words::LearningSessionController < ApplicationController
   before_action :delete_uncompleted, only: :create
 
   def create
-    @words_to_learn = Word.order(:id).where(learning_session_id: nil).limit(params[:how_many])
-    words_ids = Array.new(@words_to_learn.map { |word| word.id })
-    @session = Words::LearningSession.new(words_ids: words_ids, user_id: current_user.id)
-    @session.save
-    redirect_to question_type_1_words_learning_session_path(id: @session.id, index: 0, type: 1)
+    words_to_learn = Word.order(:id).where(learning_session_id: nil, packet_id: params[:packet_id]).limit(params[:how_many])
+    words_ids = Array.new(words_to_learn.map { |word| word.id })
+    session = Words::LearningSession.new(words_ids: words_ids, user_id: current_user.id)
+    session.save
+    redirect_to question_type_1_words_learning_session_path(id: session.id, index: 0, type: 1)
   end
-
 
   def question_type_1
     session = Words::LearningSession.find(params[:id])
@@ -49,8 +48,10 @@ class Words::LearningSessionController < ApplicationController
 
     if correctness
       session.good_answers[type] << word.id
+      repetition = Words::Repetition.new(word_id: word.id, next_rep: Date.today + 3).save! if type == 5
     else
       session.wrong_answers[type] << word.id
+      repetition = Words::Repetition.new(word_id: word.id, next_rep: Date.today + 1).save! if type == 5
     end
 
     session.save

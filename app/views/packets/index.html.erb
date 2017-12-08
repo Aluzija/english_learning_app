@@ -18,8 +18,8 @@
     <tr>
       <td><%= index + 1 %></td>
       <td><%= packet.name %></td>
-      <td><%= link_to "usuń", packet_path(params[:user_id], id: packet.id), method: "delete", data: { confirm: "Are you sure you want delete this packet?" } %></td>
-      <td><%= link_to "wejdź", packet_words_path(params[:user_id], packet_id: packet.id) %></td>
+      <td><%= link_to "usuń", packet_path(packet.id), method: "delete", data: { confirm: "Are you sure you want delete this packet?" } %></td>
+      <td><%= link_to "wejdź", packet_words_path(packet.id) %></td>
     </tr>
     <% end %>
   </table>

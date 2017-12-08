@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128175449) do
+ActiveRecord::Schema.define(version: 20171208100717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20171128175449) do
     t.string "name", null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_packets_on_user_id"
+  end
+
+  create_table "repetitions", force: :cascade do |t|
+    t.integer "word_id", null: false
+    t.date "last_rep"
+    t.date "next_rep", null: false
+    t.integer "rep", default: 0
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,7 +60,6 @@ ActiveRecord::Schema.define(version: 20171128175449) do
     t.string "polish_synonyms"
     t.string "english_synonyms"
     t.string "sample_sentence"
-    t.integer "repetition", default: 0
     t.integer "packet_id", null: false
     t.bigint "learning_session_id"
     t.index ["english"], name: "index_words_on_english"
@@ -64,5 +70,6 @@ ActiveRecord::Schema.define(version: 20171128175449) do
 
   add_foreign_key "learning_sessions", "users"
   add_foreign_key "packets", "users"
+  add_foreign_key "repetitions", "words"
   add_foreign_key "words", "learning_sessions"
 end
