@@ -1,17 +1,13 @@
 class Word < ApplicationRecord
   belongs_to :packet
-  # has_one :repetition
+  has_one :repetition, class_name: "Words::Repetition"
 
   validates :polish, presence: true
   validates :english, presence: true
-  validates :polish, uniqueness: { scope: "english" }
-
-  def repetition
-    Words::Repetition.where("word_id" => self.id).first
-  end
+  validates :polish, uniqueness: { scope: ["english", "packet_id"] }
 
   def words_english_synonyms
-    Word.all.where("polish" => self.polish)
+    Word.all.where("polish" => self.polish, "packet_id" => self.packet_id)
   end
 
   def similar
