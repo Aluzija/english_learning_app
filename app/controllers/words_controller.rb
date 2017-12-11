@@ -5,7 +5,7 @@ class WordsController < ApplicationController
     user = current_user
     @packet = user.packets.find(params[:packet_id])
     @words = @packet.words.order(@order)
-    @repetitions = Words::Repetition.where("next_rep" => Date.today.to_s)
+    @repetitions = Words::Repetition.where("next_rep" => Date.today.to_s, "packet_id" => @packet.id)
     @repetitions.any? ? @word_id = @repetitions.first.word.id : @word_id = 0
   end
 

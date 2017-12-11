@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171208100717) do
+ActiveRecord::Schema.define(version: 20171211124310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20171208100717) do
     t.date "last_rep"
     t.date "next_rep", null: false
     t.integer "rep", default: 0
+    t.integer "packet_id", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,6 +71,7 @@ ActiveRecord::Schema.define(version: 20171208100717) do
 
   add_foreign_key "learning_sessions", "users"
   add_foreign_key "packets", "users"
+  add_foreign_key "repetitions", "packets"
   add_foreign_key "repetitions", "words"
   add_foreign_key "words", "learning_sessions"
 end
