@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :packets, only: [:create, :destroy] do
     resources :words, only: [:index, :create, :new]
   end
+  get "packets/:packet_id/words/too_many", to: "words#too_many", as: "packet_words_too_many"
   resources :words, only: [:edit, :update, :destroy]
   namespace :words do
     resources :repetition, only: :index  do

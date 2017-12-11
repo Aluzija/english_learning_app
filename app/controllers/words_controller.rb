@@ -76,6 +76,11 @@ class WordsController < ApplicationController
     end
   end
 
+  def too_many
+    @packet = Packet.find(params[:packet_id])
+    @how_many = Word.where(learning_session_id: nil, packet_id: params[:packet_id]).count
+  end
+
   private
 
   def word_params

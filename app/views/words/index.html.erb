@@ -1,7 +1,6 @@
 Jesteś aktualnie w paczce słówek: <%= @packet.name %>
 <button><%= link_to "Zmień paczkę", user_packets_path(current_user) %></button><br>
 
-<%#= radio_button_tag  %>
 <% if @packet.words.any? %>
   <table>
     <tr>
@@ -28,15 +27,21 @@ Jesteś aktualnie w paczce słówek: <%= @packet.name %>
     </tr>
     <% end %>
   </table>
+  
+  <% if @words.count < 10 %>
+    <p> Aby skorzystać z funkcji nauki w paczce musi się znajdować co najmniej 10 słówek.</p>
+  <% else %>
   <button><%= link_to "ucz się nowych słowek", "#", onclick: "show_form(#{"how_many_form"})", class: "show_or_hide_form" %></button>
-  <div id="how_many_form">
-    <%= form_tag words_learning_session_index_path(packet_id: params[:packet_id]) do %>
-      <%= label_tag :how_many, "Jak dużo?" %>
-      <%= text_field_tag :how_many %>
-      <%= submit_tag "Do nauki!" %>
-      <%= link_to "Anuluj", "#", onclick: "hide_form(#{"how_many_form"})", class: "show_or_hide_form" %>
-    <% end %>
-  </div>
+    <div id="how_many_form">
+      <%= form_tag words_learning_session_index_path(packet_id: params[:packet_id]) do %>
+        <%= label_tag :how_many, "Jak dużo?" %>
+        <%= text_field_tag :how_many %>
+        <%= submit_tag "Do nauki!" %>
+        <%= link_to "Anuluj", "#", onclick: "hide_form(#{"how_many_form"})", class: "show_or_hide_form" %>
+      <% end %>
+    </div>
+  <% end %>
+
   <% if @repetitions.any? %>
     <% number = @repetitions.count %>
   <% else %>
