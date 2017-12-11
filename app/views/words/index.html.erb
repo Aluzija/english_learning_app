@@ -5,6 +5,7 @@ Jesteś aktualnie w paczce słówek: <%= @packet.name %>
 <% if @packet.words.any? %>
   <table>
     <tr>
+      <th><%= link_to "Lp", packet_words_path(params[:packet_id], order: "id")%></th>
       <th><%= link_to "angielski", packet_words_path(params[:packet_id], order: "english")%></th>
       <th><%= link_to "polski", packet_words_path(params[:packet_id], order: "polish")%></th>
       <th>angielskie synonimy</th>
@@ -12,8 +13,9 @@ Jesteś aktualnie w paczce słówek: <%= @packet.name %>
       <th> polskie synonimy</th>
       <th>akcja</th>
     </tr>
-    <% @words.each do |word| %>
+    <% @words.each_with_index do |word, index| %>
     <tr>
+      <td><%= index + 1 %></td>
       <td><%= word.english %></td>
       <td><%= word.polish %></td>
       <td><%= word.english_synonyms %></td>

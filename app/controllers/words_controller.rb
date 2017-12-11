@@ -1,7 +1,7 @@
 class WordsController < ApplicationController
 
   def index
-    @order = params[:order] || "english"
+    @order = params[:order] || "id"
     user = current_user
     @packet = user.packets.find(params[:packet_id])
     @words = @packet.words.order(@order)
