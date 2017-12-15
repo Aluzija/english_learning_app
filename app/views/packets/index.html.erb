@@ -1,28 +1,52 @@
-<div class="tip">
-  Tutaj możesz stworzyć paczkę słówek. Ze względu na wygodę uczenia dobrze aby pojedyncza paczka nie była
-  wieksza niż 500 słówek.
-</div>
-<div>
-  Wybierz paczkę słówek, na której chcesz pracować albo <%= link_to "utwórz nową", "#", onclick: "show_form(#{"packet_form"})", class: "show_or_hide_form" %>.
-</div>
-<%= render "form" %>
+<div class="container">
+  <div class="jumbotron">
+    <div class="flex-container">
+      <div>
+        Tutaj możesz stworzyć paczkę słówek. Ze względu na wygodę uczenia dobrze aby pojedyncza paczka nie była
+        wieksza niż 500 słówek.<br />
+        Wybierz paczkę słówek, na której chcesz pracować albo <%= link_to "utwórz nową", "#", onclick: "show_form(#{"packet_form"})", class: "show_or_hide_form btn btn-primary btn-sm" %>
+      </div>
+      <%= render "form" %>
+    </div><br />
+    <div class="flex-container">
+      <div class="widget stacked widget-table action-table">
+        <div class="widget-header">
+          <i class="icon-th-list"></i>
+          <h3>Twoje paczki</h3>
+        </div>
 
-<% if @user.packets.any? %>
-  <table>
-    <tr>
-      <th>Lp</th>
-      <th>Nazwa</th>
-      <th>Akcja</th>
-    </tr>
-    <% @user.packets.each_with_index do |packet, index| %>
-    <tr>
-      <td><%= index + 1 %></td>
-      <td><%= packet.name %></td>
-      <td><%= link_to "usuń", packet_path(packet.id), method: "delete", data: { confirm: "Are you sure you want delete this packet?" } %></td>
-      <td><%= link_to "wejdź", packet_words_path(packet.id) %></td>
-    </tr>
-    <% end %>
-  </table>
-<% else %>
-  You have no packets yet.
-<% end %>
+        <% if current_user.packets.any? %>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Lp</th>
+                <th>Nazwa</th>
+                <th class="td-actions">Wejdź</th>
+                <th class="td-actions">Usuń</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% current_user.packets.each_with_index do |packet, index| %>
+                <tr>
+                  <td><center><%= index + 1 %></center></td>
+                  <td><%= packet.name %></td>
+                  <td class="td-actions">
+                    <center><%= link_to "&#10148;".html_safe, packet_words_path(packet.id), class: "btn btn-sm btn-primary" %></center>
+                  </td>
+                  <td class="td-actions">
+                    <center><%= link_to "&#10008;".html_safe, packet_path(packet.id), method: "delete",
+                    class: "btn btn-sm btn-primary",
+                    data: { confirm: "Jesteś pewien, że chcesz usunąć tą paczkę?" } %></center>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+        <% else %>
+          You have no packets yet.
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

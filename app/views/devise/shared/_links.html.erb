@@ -1,14 +1,14 @@
 <%- if params[:sign_up] || controller_name == 'passwords' %>
-  <%= link_to "Log in", root_path(sign_up: nil) %><br />
+  <%= link_to "Otwórz panel logowania", root_path(sign_up: nil), class: "btn btn-primary btn-block btn-sm login-button" %><br />
 <% end -%>
 
 <%- if devise_mapping.registerable? && params[:sign_up] == nil %>
-  <%= link_to "Sign up", root_path(sign_up: true) %><br />
+  <%= link_to "Otwórz panel tworzenia konta", root_path(sign_up: true), class: "btn btn-primary btn-block btn-sm login-button" %><br />
 <% end -%>
 
-<%- if devise_mapping.recoverable? && !params[:sign_up] && controller_name != 'passwords' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-<% end -%>
+<%#- if devise_mapping.recoverable? && !params[:sign_up] && controller_name != 'passwords' %>
+  <%#= link_to "Przypomnij hasło", new_password_path(resource_name) %><br />
+<%# end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />

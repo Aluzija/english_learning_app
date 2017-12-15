@@ -1,15 +1,20 @@
 <div id="packet_form">
-  <%= form_for @packet, url: user_packets_path(params[:user_id]) do |f| %>
-    <%= f.label :name, "nazwa paczki" %>
-    <%= @packet.error(:name) %>
-    <%= f.text_field :name %>
-    <%= f.submit "dodaj paczkę" %>
-    <%= link_to "Anuluj", "#", onclick: "hide_form(#{"packet_form"})", class: "show_or_hide_form" %>
+  <%= form_for @packet, url: packets_path do |f| %>
+    <%= f.label :name, "nazwa paczki", class: "object" %>
+    <%= f.text_field :name, class: "object" %>
+    <%= f.submit "dodaj paczkę", class: "btn btn-primary btn-sm object" %>
+    <%= link_to "Anuluj", "#", onclick: "hide_form(#{"packet_form"})", class: "object show_or_hide_form btn btn-primary btn-sm" %>
+    <br /><br />
+    <div class="error">
+      <%= "Nazwa paczki " + @packet.error(:name).join + "." if @packet.errors.any? %>
+    </div>
   <% end %>
 </div>
 
+
 <% if @packet.errors.any? %>
+
   <script type="text/javascript">
-    show_packet_form();
+    show_form(packet_form);
   </script>
 <% end %>

@@ -11,14 +11,27 @@
 
   <body>
     <% if user_signed_in? %>
-      <div class="side-panel">
-        You're logged in as <%= current_user.email %>
-        <button class="logout"><%= link_to('Logout', destroy_user_session_path, method: :delete) %></button>
-      </div>
+      <nav class="navbar navbar-expand-sm bg-mine">
+        <span class="navbar-brand">Jesteś zalogowany jako <%= current_user.email %></span>
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <%= link_to('Wyloguj', destroy_user_session_path, method: :delete, class: "nav-link active") %>
+          </li>
+        </ul>
+      </nav>
     <% end %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if notice || alert %>
+    <div class="container">
+
+        <div class="alert alert-info allert-dismissable" align="center">
+          <a id= "x" href="#" class="close" data-dismiss="alert" aria-label="close">&#9747;</a>
+          <%= notice %>
+          <%= alert %>
+        </div>
+
+    </div>
+    <% end %>
 
     <%= yield %>
   </body>

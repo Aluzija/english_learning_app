@@ -6,9 +6,8 @@ class PacketsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
     @packet = Packet.new(packet_params)
-    @packet.user_id = params[:user_id]
+    @packet.user_id = current_user.id
     if @packet.save
       redirect_to user_packets_path(params[:user_id])
     else
