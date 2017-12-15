@@ -128,7 +128,7 @@ function check_type_5() {
 function disactivate() {
   var link = document.getElementById("repetition_button");
   link.href = "javascript: void(0)";
-  link.style.color = 'grey';
+  link.style.color = '#c0c0c0';
 }
 
 window.addEventListener("load", function() {

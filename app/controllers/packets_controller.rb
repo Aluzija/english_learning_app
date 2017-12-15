@@ -9,7 +9,7 @@ class PacketsController < ApplicationController
     @packet = Packet.new(packet_params)
     @packet.user_id = current_user.id
     if @packet.save
-      redirect_to user_packets_path(params[:user_id])
+      redirect_to user_packets_path(current_user.id)
     else
       render "index"
     end
@@ -18,7 +18,7 @@ class PacketsController < ApplicationController
   def destroy
     packet = Packet.find(params[:id])
     packet.destroy
-    redirect_to user_packets_path(params[:user_id])
+    redirect_to user_packets_path(current_user.id)
   end
 
   private

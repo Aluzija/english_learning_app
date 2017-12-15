@@ -1,55 +1,92 @@
-Jesteś aktualnie w paczce słówek: <%= @packet.name %>
-<button><%= link_to "Zmień paczkę", user_packets_path(current_user) %></button><br>
-
-<% if @packet.words.any? %>
-  <table>
-    <tr>
-      <th><%= link_to "Lp", packet_words_path(params[:packet_id], order: "id")%></th>
-      <th><%= link_to "angielski", packet_words_path(params[:packet_id], order: "english")%></th>
-      <th><%= link_to "polski", packet_words_path(params[:packet_id], order: "polish")%></th>
-      <th>angielskie synonimy</th>
-      <th>dźwięk</th>
-      <th> polskie synonimy</th>
-      <th>akcja</th>
-    </tr>
-    <% @words.each_with_index do |word, index| %>
-    <tr>
-      <td><%= index + 1 %></td>
-      <td><%= word.english %></td>
-      <td><%= word.polish %></td>
-      <td><%= word.english_synonyms %></td>
-      <td><input onclick='responsiveVoice.speak("<%= word.english %>");' type='button' value='🔊 Play' /></td>
-      <td><%= word.polish_synonyms %></td>
-      <td>
-        <%= link_to "edytuj", edit_word_path(word.id) %>
-        <%= link_to "usuń", word_path(word.id), method: "delete", data: { confirm: "Jesteś pewien, że chcesz usunąć słowo z paczki?" } %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
-  
-  <% if @words.count < 10 %>
-    <p> Aby skorzystać z funkcji nauki w paczce musi się znajdować co najmniej 10 słówek.</p>
-  <% else %>
-  <button><%= link_to "ucz się nowych słowek", "#", onclick: "show_form(#{"how_many_form"})", class: "show_or_hide_form" %></button>
-    <div id="how_many_form">
-      <%= form_tag words_learning_session_index_path(packet_id: params[:packet_id]) do %>
-        <%= label_tag :how_many, "Jak dużo?" %>
-        <%= text_field_tag :how_many %>
-        <%= submit_tag "Do nauki!" %>
-        <%= link_to "Anuluj", "#", onclick: "hide_form(#{"how_many_form"})", class: "show_or_hide_form" %>
+<div class="container jumbotron">
+  <div class="flex-container">
+    <div>
+      <p class="object">Jesteś aktualnie w paczce słówek: <%= @packet.name %></p>
+      <%= link_to "Zmień paczkę", user_packets_path(current_user),
+      class: "btn btn-primary btn-sm object" %>
+      <%= link_to "dodaj słowo", new_packet_word_path(params[:packet_id]),
+      class: "btn btn-primary btn-sm" %>
+      <br />
+    </div>
+  </div>
+  <br />
+  <% if @packet.words.any? %>
+    <table class="table table-striped table-bordered text-smaller">
+      <thead>
+        <tr>
+          <th>Sortuj po: <%= link_to "Lp", packet_words_path(params[:packet_id], order: "id")%></th>
+          <th>Sortuj po: <%= link_to "angielski", packet_words_path(params[:packet_id], order: "english")%></th>
+          <th>Sortuj po: <%= link_to "polski", packet_words_path(params[:packet_id], order: "polish")%></th>
+          <th>angielskie synonimy</th>
+          <th>dźwięk</th>
+          <th> polskie synonimy</th>
+          <th>akcja (edycja/usuń)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @words.each_with_index do |word, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= word.english %></td>
+          <td><%= word.polish %></td>
+          <td><%= word.english_synonyms %></td>
+          <td>
+            <input onclick='responsiveVoice.speak("<%= word.english %>");'
+            type='button' value='🔊' class="btn btn-primary btn-sm" />
+          </td>
+          <td><%= word.polish_synonyms %></td>
+          <td>
+            <%= link_to "&#9874;".html_safe, edit_word_path(word.id),
+            class: "btn btn-primary btn-sm object" %>
+            <%= link_to "&#9746".html_safe, word_path(word.id), method: "delete",
+            data: { confirm: "Jesteś pewien, że chcesz usunąć słowo z paczki?" },
+            class: "btn btn-primary btn-sm object" %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="flex-container">
+      <% if @words.count < 10 %>
+        <div>Aby skorzystać z funkcji nauki w paczce musi się znajdować co
+          najmniej 10 słówek.</div>
+      <% else %>
+        <div>
+          <%= link_to "ucz się nowych słówek", "#",
+          onclick: "show_form(#{"how_many_form"})",
+          class: "show_or_hide_form btn btn-primary btn-sm object" %>
+          <div id="how_many_form">
+            <%= form_tag words_learning_session_index_path(packet_id: params[:packet_id]) do %>
+              <%= label_tag :how_many, "Jak dużo?", class: "object" %>
+              <%= text_field_tag :how_many, "", maxlength: 5, size: 10, class: "object" %>
+              <%= submit_tag "Do nauki!", class: "btn btn-primary btn-sm object" %>
+              <%= link_to "Anuluj", "#", onclick: "hide_form(#{"how_many_form"})",
+              class: "show_or_hide_form btn btn-primary btn-sm object" %>
+            <% end %>
+          </div>
+          <br />
+        </div>
       <% end %>
+    </div>
+    <div class="flex-container"
+      <% if @repetitions.any? %>
+        <% number = @repetitions.count %>
+      <% else %>
+        <% number = "brak" %>
+        <p id="disactivate"></p>
+      <% end %>
+      <div>
+        <%= link_to "powtórki na dziś(#{number})",
+        ask_words_repetition_path(@word_id), id: "repetition_button",
+        class: "btn btn-primary btn-sm object" %>
+        <br />
+      </div>
+    </div>
+
+  <% else %>
+    <div class="flex-container">
+      <div>Paczka <%= @packet.name %> nie ma jeszcze żadnych słów.</div>
     </div>
   <% end %>
 
-  <% if @repetitions.any? %>
-    <% number = @repetitions.count %>
-  <% else %>
-    <% number = "brak" %>
-    <p id="disactivate"></p>
-  <% end %>
-  <button><%= link_to "powtórki na dziś(#{number})", ask_words_repetition_path(@word_id), id: "repetition_button" %></button>
-<% else %>
-  Paczka <%= @packet.name %> nie ma jeszcze żadnych słów.
-<% end %>
-<button><%= link_to "dodaj słowo", new_packet_word_path(params[:packet_id]) %></button>
+</div>
