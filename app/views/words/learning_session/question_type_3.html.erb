@@ -1,17 +1,28 @@
-<h2>Wybierz tłumaczenie</h2>
-<%= @answer.polish %>
-
-<%= form_tag manager_words_learning_session_path(params[:id]), method: "GET" do %>
-  <% @words.each do |word| %>
-    <%= radio_button_tag :guess, word.english %>
-    <%= word.english %>
-    <br />
-  <% end %>
-  <%= hidden_field_tag :index, params[:index] %>
-  <%= hidden_field_tag :answer, @answer.english %>
-  <%= hidden_field_tag :type, params[:type] %>
-  <%= hidden_field_tag :correctness, "" %>
-  <%= button_tag "sprawdź", onclick: "check_type_3()", id: "js_activation_button" %>
-  <p id="feedback_info"></p>
-<%= submit_tag "Dalej", class: "next_after_check" %>
-<% end %>
+<div class="container jumbotron">
+  <div class="flex-container">
+    <div>
+      <h2>Wybierz tłumaczenie</h2>
+      <h4><%= @answer.polish %></h4>
+    </div>
+  </div>
+  <br />
+  <div class="flex-container">
+    <div>
+      <%= form_tag manager_words_learning_session_path(params[:id]), method: "GET" do %>
+        <% @words.each do |word| %>
+          <%= radio_button_tag :guess, word.english %>
+          <%= word.english %>
+          <br />
+        <% end %>
+        <%= hidden_field_tag :index, params[:index] %>
+        <%= hidden_field_tag :answer, @answer.english %>
+        <%= hidden_field_tag :type, params[:type] %>
+        <%= hidden_field_tag :correctness, "" %>
+        <%= button_tag "sprawdź", class: "btn btn-primary btn-sm",
+        onclick: "check_type_3()", id: "js_activation_button" %>
+        <p id="feedback_info"></p>
+        <%= submit_tag "Dalej", class: "next_after_check btn btn-primary btn-sm" %>
+      <% end %>
+    </div>
+  </div>
+</div>

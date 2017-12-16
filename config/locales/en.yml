@@ -34,9 +34,18 @@ en:
     attributes:
       packet:
         name: "Nazwa paczki"
+      word:
+        polish: "Pole \"po polsku\""
+        english: "Pole \"po angielsku\""
     errors:
       models:
         packet:
           attributes:
             name:
               blank: "nie może byc pusta"
+        word:
+          attributes:
+            polish:
+              blank: "nie może być puste"
+            english:
+              blank: "nie może być puste"

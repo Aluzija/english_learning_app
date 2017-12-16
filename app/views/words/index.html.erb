@@ -68,7 +68,7 @@
         </div>
       <% end %>
     </div>
-    <div class="flex-container"
+    <div class="flex-container">
       <% if @repetitions.any? %>
         <% number = @repetitions.count %>
       <% else %>
@@ -79,6 +79,7 @@
         <%= link_to "powtórki na dziś(#{number})",
         ask_words_repetition_path(@word_id), id: "repetition_button",
         class: "btn btn-primary btn-sm object" %>
+        <p class="object"><%= "Najbliższa powtórka: #{@closest_repetition} " if number == "brak" %></p>
         <br />
       </div>
     </div>

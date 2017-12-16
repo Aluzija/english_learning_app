@@ -1,8 +1,17 @@
-Jesteś aktualnie w paczce słówek: <%= @packet.name %>
-<button><%= link_to "Zmień paczkę", user_packets_path(current_user) %></button><br>
-
-<%= render partial: "shared/errors", locals: { model: @word } %>
-<%= form_for @word, url: packet_words_path( params[:packet_id], confirm: false) do |f| %>
-  <%#= f.hidden_field "foo", "1" %>
-  <%= render partial: "form", locals: { order: "dodaj słowo", f: f } %>
-<% end %>
+<div class="container jumbotron">
+  <div class="flex-container">
+    <div>
+      Jesteś aktualnie w paczce słówek: <%= @packet.name %>
+      <%= link_to "Zmień paczkę", user_packets_path(current_user),class: "btn btn-primary btn-sm" %>
+    </div>
+  </div>
+  <br />
+  <div class="flex-container">
+    <div>
+      <%= render partial: "shared/errors", locals: { model: @word } %>
+      <%= form_for @word, url: packet_words_path( params[:packet_id], confirm: false) do |f| %>
+        <%= render partial: "form", locals: { order: "dodaj słowo", f: f } %>
+      <% end %>
+    </div>
+  </div>
+</div>

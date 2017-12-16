@@ -16,6 +16,7 @@ class Word < ApplicationRecord
       how_many = 3 - words.length
       words += Word.all.where("id <> ?", id).limit(how_many)
     end
+    words
   end
-
+  
 end

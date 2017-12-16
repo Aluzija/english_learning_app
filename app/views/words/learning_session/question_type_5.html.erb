@@ -1,4 +1,19 @@
-<%=
-  render partial: "words/question_type_5",
-  locals: { manager: manager_words_learning_session_path(params[:id]) } 
-%>
+<div class="container jumbotron">
+  <div class="flex-container">
+    <div>
+      <h3>Wpisz tłumaczenie</h3>
+      <h4><%= @answer.polish %></h4>
+      <%= form_tag manager_words_learning_session_path(params[:id]), method: "GET" do %>
+        <%= text_field_tag :guess %>
+        <%= hidden_field_tag :index, params[:index] %>
+        <%= hidden_field_tag :answer, @answer.english %>
+        <%= hidden_field_tag :type, params[:type] %>
+        <%= hidden_field_tag :correctness, "" %>
+        <%= button_tag "sprawdź",class: "btn btn-primary btn-sm",
+        onclick: "check_type_5()", id: "js_activation_button" %>
+        <p id="feedback_info"></p>
+        <%= submit_tag "Dalej", class: "next_after_check btn btn-primary btn-sm" %>
+      <% end %>
+    </div>
+  </div>
+</div>

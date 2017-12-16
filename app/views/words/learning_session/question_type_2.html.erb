@@ -1,18 +1,32 @@
-<h2>Co znaczy?</h2>
-<input onclick='responsiveVoice.speak("<%= @answer.english %>");' type='button' value='🔊 Play' id='autoplay' />
-<%= @answer.english %>
-
-<%= form_tag manager_words_learning_session_path(params[:id]), method: "GET" do %>
-  <% @words.each do |word| %>
-    <%= radio_button_tag :guess, word.polish %>
-    <%= word.polish %>
-    <br />
-  <% end %>
-  <%= hidden_field_tag :index, params[:index] %>
-  <%= hidden_field_tag :answer, @answer.polish %>
-  <%= hidden_field_tag :type, params[:type] %>
-  <%= hidden_field_tag :correctness, "" %>
-  <%= button_tag "sprawdź", onclick: "check_type_2()", id: "js_activation_button" %>
-  <p id="feedback_info"></p>
-<%= submit_tag "Dalej", class: "next_after_check" %>
-<% end %>
+<div class="container jumbotron">
+  <div class="flex-container">
+    <div>
+      <h3 class="object">Co znaczy?</h3>
+      <input class="object btn btn-primary btn-sm"
+      onclick='responsiveVoice.speak("<%= @answer.english %>");'
+      type='button' value='🔊 Odtwórz' id='autoplay' />
+      <br /><br />
+      <h4><%= @answer.english %></h4>
+    </div>
+  </div>
+  <br />
+  <div class="flex-container">
+    <div>
+      <%= form_tag manager_words_learning_session_path(params[:id]), method: "GET" do %>
+        <% @words.each do |word| %>
+          <%= radio_button_tag :guess, word.polish %>
+          <%= word.polish %>
+          <br />
+        <% end %>
+        <%= hidden_field_tag :index, params[:index] %>
+        <%= hidden_field_tag :answer, @answer.polish %>
+        <%= hidden_field_tag :type, params[:type] %>
+        <%= hidden_field_tag :correctness, "" %>
+        <%= button_tag "sprawdź", onclick: "check_type_2()",
+        id: "js_activation_button", class: "btn btn-primary btn-sm" %>
+        <p id="feedback_info"></p>
+        <%= submit_tag "Dalej", class: "next_after_check btn btn-primary btn-sm" %>
+      <% end %>
+    </div>
+  </div>
+</div>

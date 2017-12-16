@@ -1,11 +1,18 @@
-<h2>Wpisz tłumaczenie</h2>
-<%= @answer.polish %>
-<%= form_tag words_repetition_index_path, method: "GET" do %>
-  <%= text_field_tag :guess %>
-  <%= hidden_field_tag :answer, @answer.english %>
-  <%= hidden_field_tag :packet_id, @answer.packet_id %>
-  <%= hidden_field_tag :correctness, "" %>
-  <%= button_tag "sprawdź", onclick: "check_type_5()", id: "js_activation_button" %>
-  <p id="feedback_info"></p>
-  <%= submit_tag "Dalej", class: "next_after_check" %>
-<% end %>
+<div class="container jumbotron">
+  <div class="flex-container">
+    <div>
+      <h3>Wpisz tłumaczenie</h3>
+      <h4><%= @answer.polish %></h4>
+      <%= form_tag words_repetition_index_path, method: "GET" do %>
+        <%= text_field_tag :guess %>
+        <%= hidden_field_tag :answer, @answer.english %>
+        <%= hidden_field_tag :packet_id, @answer.packet_id %>
+        <%= hidden_field_tag :correctness, "" %>
+        <%= button_tag "sprawdź", class: "btn btn-primary btn-sm",
+        onclick: "check_type_5()", id: "js_activation_button" %>
+        <p id="feedback_info"></p>
+        <%= submit_tag "Dalej", class: "next_after_check btn btn-primary btn-sm" %>
+      <% end %>
+    </div>
+  </div>
+</div>
