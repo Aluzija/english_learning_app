@@ -18,23 +18,23 @@ class Words::RepetitionController < ApplicationController
 
   def ask
     @answer = Word.find(params[:id])
-    if @answer.english_synonyms.any?
-      synonyms = @answer.english_synonyms.split(", ")
-
-      letter_repetition_array = synonyms.map do |synonym|
-        @answer.english.first == synonym.first
-      end
-      if !letter_repetition_array.include?(false)
-        @hint = @answer.english.first
-      else
-        
-        @answer.each do |letter|
-          while
-
-          end
-        end
-
-      end
+    # if @answer.english_synonyms.any?
+    #   synonyms = @answer.english_synonyms.split(", ")
+    #
+    #   letter_repetition_array = synonyms.map do |synonym|
+    #     @answer.english.first == synonym.first
+    #   end
+    #   if !letter_repetition_array.include?(false)
+    #     @hint = @answer.english.first
+    #   else
+    #
+    #     @answer.each do |letter|
+    #       while
+    #
+    #       end
+    #     end
+    #
+    #   end
 
 
       #   if @hint.any?
@@ -58,7 +58,7 @@ class Words::RepetitionController < ApplicationController
 
       # @hint = @answer.english.first + "..."
 
-    end
+    # end
   end
 
 end

@@ -29,7 +29,9 @@ window.addEventListener("load", function() {
 function show_form(object)
 {
   var id = object.id;
-  document.getElementById(id).style.display = 'block';
+  if (!(document.getElementById("disactivate") !== null && id === "how_many_form_rep")) {
+    document.getElementById(id).style.display = 'block';
+  }
 }
 
 function hide_form(object, event)

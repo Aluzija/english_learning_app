@@ -76,9 +76,18 @@
         <p id="disactivate"></p>
       <% end %>
       <div>
-        <%= link_to "powtórki na dziś(#{number})",
-        ask_words_repetition_path(@word_id), id: "repetition_button",
-        class: "btn btn-primary btn-sm object" %>
+        <%= link_to "powtórki na dziś(#{number})", "#",
+        onclick: "show_form(#{"how_many_form_rep"})", id: "repetition_button",
+        class: "show_or_hide_form btn btn-primary btn-sm object" %>
+        <div id="how_many_form_rep">
+          <%= form_tag ask_words_repetition_path(@word_id), method: :get do %>
+            <%= label_tag :how_many, "Jak dużo?", class: "object" %>
+            <%= text_field_tag :how_many, number, maxlength: 5, size: 10, class: "object" %>
+            <%= submit_tag "Powtórka - start!", class: "btn btn-primary btn-sm object" %>
+            <%= link_to "Anuluj", "#", onclick: "hide_form(#{"how_many_form_rep"})",
+            class: "show_or_hide_form btn btn-primary btn-sm object" %>
+          <% end %>
+        </div>
         <p class="object"><%= "Najbliższa powtórka: #{@closest_repetition} " if number == "brak" %></p>
         <br />
       </div>
@@ -86,7 +95,7 @@
 
   <% else %>
     <div class="flex-container">
-      <div>Paczka <%= @packet.name %> nie ma jeszcze żadnych słów.</div>
+      <div>Paczka "<%= @packet.name %>" nie ma jeszcze żadnych słów.</div>
     </div>
   <% end %>
 
