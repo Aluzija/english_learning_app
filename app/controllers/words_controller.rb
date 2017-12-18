@@ -7,7 +7,12 @@ class WordsController < ApplicationController
     @words = @packet.words.order(@order)
     @repetitions = Words::Repetition.where("next_rep" => Date.today.to_s, "packet_id" => @packet.id)
     @repetitions.any? ? @word_id = @repetitions.first.word.id : @word_id = 0
-    @closest_repetition = Words::Repetition.order("next_rep").first.next_rep
+    rep = Words::Repetition.order("next_rep").first
+    if rep.nil?
+      @closest_repetition = "brak powtórek"
+    else
+      @closest_repetition = rep.next_rep
+    end
   end
 
   def new
