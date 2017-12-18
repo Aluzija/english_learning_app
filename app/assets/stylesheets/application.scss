@@ -21,11 +21,11 @@
   margin: auto;
 }
 
-#how_many_form {
-  display: none;
-}
-
-.next_after_check, #after_guess {
+#how_many_form,
+#how_many_form_rep,
+.next_after_check,
+#after_guess,
+#hidden_sound {
   display: none;
 }
 
@@ -150,6 +150,10 @@ border-color: inherit;
 
 .text-smaller {
   font-size: small;
+}
+
+.to_right {
+  text-align: right;
 }
 
 // table end

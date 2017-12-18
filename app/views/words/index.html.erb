@@ -80,7 +80,7 @@
         onclick: "show_form(#{"how_many_form_rep"})", id: "repetition_button",
         class: "show_or_hide_form btn btn-primary btn-sm object" %>
         <div id="how_many_form_rep">
-          <%= form_tag ask_words_repetition_path(@word_id), method: :get do %>
+          <%= form_tag checker_words_repetition_path(@word_id), method: :get do %>
             <%= label_tag :how_many, "Jak dużo?", class: "object" %>
             <%= text_field_tag :how_many, number, maxlength: 5, size: 10, class: "object" %>
             <%= submit_tag "Powtórka - start!", class: "btn btn-primary btn-sm object" %>

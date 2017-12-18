@@ -2,7 +2,10 @@
   <div class="flex-container">
     <div>
       <h3>Wpisz tłumaczenie</h3>
-      <h4><%= @answer.polish %></h4>
+      <h4 class="object"><%= @answer.polish %></h4>
+      <input onclick='responsiveVoice.speak("<%= @answer.english %>");'
+      type='button' value='🔊' class="btn btn-primary btn-sm object" id="hidden_sound" />
+      <br /><br />
       <%= form_tag manager_words_learning_session_path(params[:id]), method: "GET" do %>
         <%= text_field_tag :guess %>
         <%= hidden_field_tag :index, params[:index] %>

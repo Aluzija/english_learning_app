@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :repetition, only: :index  do
       member do
         get "ask"
+        get "checker"
       end
     end
     resources :learning_session, only: :create do

@@ -122,9 +122,13 @@ function check_type_5() {
   var info = document.getElementById("feedback_info");
   var next_button = document.getElementsByClassName("next_after_check")[0];
   var correctness = document.getElementById("correctness");
+  var sound_button = document.getElementById("hidden_sound");
+  var play = document.getElementById("autoplay");
   if(guess.value === answer.value) { info.innerHTML = "Dobrze!"; correctness.value = true; }
   else { info.innerHTML = "Błąd. Poprawna odpowiedź: " + answer.value; correctness.value = false; }
   next_button.style.display = 'block';
+  sound_button.style.display = 'block';
+  play.onclick(event);
 }
 
 function disactivate() {

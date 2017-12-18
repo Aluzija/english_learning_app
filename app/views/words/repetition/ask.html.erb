@@ -2,12 +2,16 @@
   <div class="flex-container">
     <div>
       <h3>Wpisz tłumaczenie</h3>
-      <h4><%= @answer.polish %></h4>
+      <h4 class="object"><%= @answer.polish %></h4>
+      <input onclick='responsiveVoice.speak("<%= @answer.english %>");'
+      type='button' value='🔊' class="btn btn-primary btn-sm object" id="hidden_sound" />
+      <br /><br />
       <%= form_tag words_repetition_index_path, method: "GET" do %>
         <%= text_field_tag :guess %>
         <%= hidden_field_tag :answer, @answer.english %>
         <%= hidden_field_tag :packet_id, @answer.packet_id %>
         <%= hidden_field_tag :correctness, "" %>
+        <%= hidden_field_tag :how_many, @how_many %>
         <%= button_tag "sprawdź", class: "btn btn-primary btn-sm",
         onclick: "check_type_5()", id: "js_activation_button" %>
         <p id="feedback_info"></p>
@@ -15,4 +19,6 @@
       <% end %>
     </div>
   </div>
+  <br />
+  <p class="to_right"><%= link_to "Przerwij", packet_words_path(@packet_id), class: "btn btn-primary btn-md" %></p>
 </div>
