@@ -11,7 +11,7 @@
         <%= hidden_field_tag :answer, @answer.english %>
         <%= hidden_field_tag :type, params[:type] %>
         <%= hidden_field_tag :correctness, "" %>
-        <%= text_field_tag :guess, "", maxlength: 5, size: 20, class: "object" %>
+        <%= text_field_tag :guess, "", size: 20, class: "object" %>
         <%= button_tag "sprawdź", class: "btn btn-primary btn-sm object",
         onclick: "check_type_5()", id: "js_activation_button" %>
         <%= submit_tag "Dalej", class: "next_after_check btn btn-primary btn-sm object" %>
