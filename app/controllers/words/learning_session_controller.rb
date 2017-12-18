@@ -2,7 +2,8 @@ class Words::LearningSessionController < ApplicationController
   before_action :delete_uncompleted, only: :create
 
   def create
-    if Word.where(learning_session_id: nil, packet_id: params[:packet_id]).count < params[:how_many].to_i
+    available_words = Word.where(learning_session_id: nil, packet_id: params[:packet_id])
+    if available_words.count < params[:how_many].to_i || params[:how_many].to_i <= 0
       redirect_to packet_words_too_many_path(params[:packet_id])
     else
       words_to_learn = Word.order(:id).where(learning_session_id: nil, packet_id: params[:packet_id]).limit(params[:how_many])

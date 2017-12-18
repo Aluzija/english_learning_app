@@ -20,13 +20,16 @@
         <%= hidden_field_tag :index, params[:index] %>
         <%= hidden_field_tag :answer, @answer.english %>
         <%= hidden_field_tag :type, params[:type] %>
-        <%= hidden_field_tag :correctness, "" %>
+        <%= hidden_field_tag :correctness, "", class: "object" %>
+        <br />
         <%= button_tag "sprawdź", onclick: "check_type_1()",
-        id: "js_activation_button", class: "btn btn-primary btn-sm" %>
-        <p id="feedback_info"></p>
-        <p id="after_guess">Po polsku: <%= @answer.polish %></p>
-        <%= submit_tag "Dalej", class: "next_after_check btn btn-primary btn-sm" %>
+        id: "js_activation_button", class: "btn btn-primary btn-sm object" %>
+        <%= submit_tag "Dalej", class: "next_after_check btn btn-primary btn-sm object" %>
+        <div id="feedback_info" class="object"></div>
+        <div id="after_guess">Po polsku: <%= @answer.polish %></div>
+        <br />
       <% end %>
     </div>
   </div>
+  <%= render "back_button" %>
 </div>

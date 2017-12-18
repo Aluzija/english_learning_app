@@ -7,16 +7,18 @@
     </div>
     <div>
       <%= form_tag manager_words_learning_session_path(params[:id]), method: "GET" do %>
-        <%= text_field_tag :guess %>
         <%= hidden_field_tag :index, params[:index] %>
         <%= hidden_field_tag :answer, @answer.english %>
         <%= hidden_field_tag :type, params[:type] %>
         <%= hidden_field_tag :correctness, "" %>
-        <%= button_tag "sprawdź", class: "btn btn-primary btn-sm",
+        <%= text_field_tag :guess, "", maxlength: 5, size: 20, class: "object" %>
+        <%= button_tag "sprawdź", class: "btn btn-primary btn-sm object",
         onclick: "check_type_4()", id: "js_activation_button" %>
-        <p id="feedback_info"></p>
-        <%= submit_tag "Dalej", class: "next_after_check btn btn-primary btn-sm" %>
+        <%= submit_tag "Dalej", class: "next_after_check btn btn-primary btn-sm object" %>
+        <p id="feedback_info" class="object"></p>
+        <br />
       <% end %>
     </div>
   </div>
+  <%= render "back_button" %>
 </div>

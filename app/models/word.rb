@@ -11,10 +11,10 @@ class Word < ApplicationRecord
   end
 
   def similar
-    words = Word.where("id <> ? AND english ilike ?", id, "#{self.english[0]}%").limit(3)
+    words = Word.where("id <> ? AND english ilike ? AND packet_id = ?", id, "#{self.english[0]}%", packet_id).limit(3)
     if words.length < 3
       how_many = 3 - words.length
-      words += Word.all.where("id <> ?", id).limit(how_many)
+      words += Word.all.where("id <> ? AND packet_id = ?", id, packet_id).limit(how_many)
     end
     words
   end

@@ -114,6 +114,8 @@ function check_type_4() {
   if(guess.value === answer.value) { info.innerHTML = "Dobrze!"; correctness.value = true; }
   else { info.innerHTML = "Błąd. Poprawna odpowiedź: " + answer.value; correctness.value = false; }
   next_button.style.display = 'block';
+  guess.disabled = true;
+  check_button.disabled = true;
 }
 
 function check_type_5() {

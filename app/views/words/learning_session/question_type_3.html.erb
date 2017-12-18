@@ -17,12 +17,15 @@
         <%= hidden_field_tag :index, params[:index] %>
         <%= hidden_field_tag :answer, @answer.english %>
         <%= hidden_field_tag :type, params[:type] %>
-        <%= hidden_field_tag :correctness, "" %>
-        <%= button_tag "sprawdź", class: "btn btn-primary btn-sm",
+        <%= hidden_field_tag :correctness, "", class: "object" %>
+        <br />
+        <%= button_tag "sprawdź", class: "btn btn-primary btn-sm object",
         onclick: "check_type_3()", id: "js_activation_button" %>
-        <p id="feedback_info"></p>
-        <%= submit_tag "Dalej", class: "next_after_check btn btn-primary btn-sm" %>
+        <%= submit_tag "Dalej", class: "next_after_check btn btn-primary btn-sm object" %>
+        <p id="feedback_info" class="object"></p>
+        <br />
       <% end %>
     </div>
   </div>
+  <%= render "back_button" %>
 </div>
