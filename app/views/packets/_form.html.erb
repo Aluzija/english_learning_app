@@ -5,16 +5,11 @@
     <%= f.submit "dodaj paczkę", class: "btn btn-primary btn-sm object" %>
     <%= link_to "Anuluj", "#", onclick: "hide_form(#{"packet_form"})", class: "object show_or_hide_form btn btn-primary btn-sm" %>
     <br /><br />
-    <div class="error">
-      <%= "Nazwa paczki " + @packet.error(:name).join + "." if @packet.errors.any? %>
-    </div>
+    <p class="error"><%= "Nazwa paczki " + @packet.error(:name).join + "." if @packet.errors.any? %></p>
+  <% end %>
+  <% if @packet.errors.any? %>
+    <script type="text/javascript">
+      show_form(packet_form);
+    </script>
   <% end %>
 </div>
-
-
-<% if @packet.errors.any? %>
-
-  <script type="text/javascript">
-    show_form(packet_form);
-  </script>
-<% end %>
