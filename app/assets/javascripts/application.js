@@ -123,12 +123,14 @@ function check_type_5() {
   var next_button = document.getElementsByClassName("next_after_check")[0];
   var correctness = document.getElementById("correctness");
   var sound_button = document.getElementById("hidden_sound");
-  var play = document.getElementById("autoplay");
+  var check_button = document.getElementById("js_activation_button");
   if(guess.value === answer.value) { info.innerHTML = "Dobrze!"; correctness.value = true; }
   else { info.innerHTML = "Błąd. Poprawna odpowiedź: " + answer.value; correctness.value = false; }
   next_button.style.display = 'block';
   sound_button.style.display = 'block';
-  play.onclick(event);
+  sound_button.onclick(event);
+  guess.disabled = true;
+  check_button.disabled = true;
 }
 
 function disactivate() {

@@ -25,7 +25,8 @@
 #how_many_form_rep,
 .next_after_check,
 #after_guess,
-#hidden_sound {
+#hidden_sound,
+#disactivate {
   display: none;
 }
 
@@ -79,7 +80,7 @@ body {
   padding: 30px;
 }
 
-.flex-container>div {
+.flex-container>div, .flex-container>p {
   background-color: #55bbee;
   padding: 30px;
 }
@@ -151,42 +152,8 @@ border-color: inherit;
 .text-smaller {
   font-size: small;
 }
+// table end
 
 .to_right {
   text-align: right;
 }
-
-// table end
-//
-// .side-panel {
-//   background-color: #ffff33;
-//   padding: 10px 10px;
-//   width: 400px;
-//   border: 2px solid #ff9900;
-// }
-// a {
-//   color: black;
-// }
-//
-// a:hover {
-//   color: inherit;
-// }
-//
-// button {
-//   background-color: #ff9900;
-//   border-radius: 30%;
-// }
-//
-// button:hover {
-//   background-color: #e68a00;
-// }
-//
-// #enter-button {
-//   padding: 20px 40px;
-//   margin: auto;
-// }
-//
-// button.logout {
-//   padding: 5px 10px;
-//   transition-duration: 0.5s;
-// }

@@ -68,14 +68,15 @@
         </div>
       <% end %>
     </div>
+    <br />
     <div class="flex-container">
-      <% if @repetitions.any? %>
-        <% number = @repetitions.count %>
-      <% else %>
-        <% number = "brak" %>
-        <p id="disactivate"></p>
-      <% end %>
       <div>
+        <% if @repetitions.any? %>
+          <% number = @repetitions.count %>
+        <% else %>
+          <% number = "brak" %>
+          <p id="disactivate"></p>
+        <% end %>
         <%= link_to "powtórki na dziś(#{number})", "#",
         onclick: "show_form(#{"how_many_form_rep"})", id: "repetition_button",
         class: "show_or_hide_form btn btn-primary btn-sm object" %>
