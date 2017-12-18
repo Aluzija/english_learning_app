@@ -6,13 +6,9 @@ class WordsController < ApplicationController
     @packet = user.packets.find(params[:packet_id])
     @words = @packet.words.order(@order)
     @repetitions = Words::Repetition.where("next_rep" => Date.today.to_s, "packet_id" => @packet.id)
+    next_rep_word = Words::Repetition.order("next_rep").where(packet_id: @packet.id).first
     @repetitions.any? ? @word_id = @repetitions.first.word.id : @word_id = 0
-    rep = Words::Repetition.order("next_rep").first
-    if rep.nil?
-      @closest_repetition = "brak powtórek"
-    else
-      @closest_repetition = rep.next_rep
-    end
+    !next_rep_word.nil? ? @closest_repetition = next_rep_word.next_rep : @closest_repetition = "brak powtórek"
   end
 
   def new

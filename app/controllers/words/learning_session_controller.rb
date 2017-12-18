@@ -52,10 +52,10 @@ class Words::LearningSessionController < ApplicationController
 
     if correctness
       session.good_answers[type] << word.id
-      repetition = Words::Repetition.new(packet_id: word.packet_id, word_id: word.id, next_rep: Date.today + 3).save! if type == 5
+      Words::Repetition.new(packet_id: word.packet_id, word_id: word.id, next_rep: Date.today + 3).save! if type == 5
     else
       session.wrong_answers[type] << word.id
-      repetition = Words::Repetition.new(packet_id: word.packet_id, word_id: word.id, next_rep: Date.today + 1).save! if type == 5
+      Words::Repetition.new(packet_id: word.packet_id, word_id: word.id, next_rep: Date.today + 1).save! if type == 5
     end
 
     session.save

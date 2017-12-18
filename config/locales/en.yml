@@ -43,6 +43,7 @@ en:
           attributes:
             name:
               blank: "nie może byc pusta"
+              taken: "nie może być już zajęta"
         word:
           attributes:
             polish:

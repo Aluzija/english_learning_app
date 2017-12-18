@@ -14,7 +14,7 @@
     <table class="table table-striped table-bordered text-smaller">
       <thead>
         <tr>
-          <th>Sortuj po: <%= link_to "Lp", packet_words_path(params[:packet_id], order: "id")%></th>
+          <th>Lp</th>
           <th>Sortuj po: <%= link_to "angielski", packet_words_path(params[:packet_id], order: "english")%></th>
           <th>Sortuj po: <%= link_to "polski", packet_words_path(params[:packet_id], order: "polish")%></th>
           <th>angielskie synonimy</th>
@@ -84,6 +84,7 @@
           <%= form_tag checker_words_repetition_path(@word_id), method: :get do %>
             <%= label_tag :how_many, "Jak dużo?", class: "object" %>
             <%= text_field_tag :how_many, number, maxlength: 5, size: 10, class: "object" %>
+            <%= hidden_field_tag :max, number %>
             <%= submit_tag "Powtórka - start!", class: "btn btn-primary btn-sm object" %>
             <%= link_to "Anuluj", "#", onclick: "hide_form(#{"how_many_form_rep"})",
             class: "show_or_hide_form btn btn-primary btn-sm object" %>

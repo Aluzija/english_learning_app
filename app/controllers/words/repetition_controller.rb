@@ -1,7 +1,6 @@
 class Words::RepetitionController < ApplicationController
 
   def checker
-    @how_many = params[:how_many]
     word_id = params[:id]
     @packet_id = Word.find(word_id).packet_id
     repetitions = Words::Repetition.order("next_rep").where("next_rep" => Date.today.to_s, "packet_id" => @packet_id)

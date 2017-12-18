@@ -1,6 +1,10 @@
-<h2>Hola, hola</h2>
-
-<p>W tej chwili możesz się uczyć maksymalnie <%= @how_many %> słówek, ponieważ tylko
-tyle słowek z paczki <%= @packet.name %> nie jest jeszcze w trybie nauki.</p>
-
-<button><%= link_to "wróc", packet_words_path(params[:packet_id]) %></button>
+<div class="container jumbotron">
+  <div class="flex-container">
+    <div>
+      <h2>Hola, hola</h2>
+      <p>W tej chwili możesz się uczyć maksymalnie <%= @how_many %> słówek, ponieważ tylko
+      tyle słowek z paczki "<%= @packet.name %>" nie jest jeszcze w trybie nauki.</p>
+      <%= link_to "wróc", packet_words_path(params[:packet_id]), class: "btn btn-primary btn-md" %>
+    </div>
+  </div>
+</div>

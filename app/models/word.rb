@@ -1,6 +1,6 @@
 class Word < ApplicationRecord
   belongs_to :packet
-  has_one :repetition, class_name: "Words::Repetition"
+  has_one :repetition, class_name: "Words::Repetition", dependent: :destroy
 
   validates :polish, presence: true
   validates :english, presence: true
@@ -18,5 +18,5 @@ class Word < ApplicationRecord
     end
     words
   end
-  
+
 end
