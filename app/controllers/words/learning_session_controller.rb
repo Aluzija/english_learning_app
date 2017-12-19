@@ -29,7 +29,7 @@ class Words::LearningSessionController < ApplicationController
   def question_type_2
     session = Words::LearningSession.find(params[:id])
     @answer = session.words[params[:index].to_i]
-    wrong_words = Word.where("id <> ?", @answer.id).limit(3)
+    wrong_words = Word.where("id <> ? AND packet_id = ?", @answer.id, @answer.packet_id).limit(3)
     @words = [@answer, *wrong_words]
     @words.shuffle!
   end
