@@ -1,9 +1,10 @@
 class Words::RepetitionController < ApplicationController
 
   def checker
+    @how_many = params[:how_many]
     word_id = params[:id]
     @packet_id = Word.find(word_id).packet_id
-    repetitions = Words::Repetition.order("next_rep").where("next_rep" => Date.today.to_s, "packet_id" => @packet_id)
+    repetitions = Words::Repetition.where("next_rep" => Date.today.to_s, "packet_id" => @packet_id)
     if repetitions.count >= @how_many.to_i && @how_many.to_i > 0
       redirect_to ask_words_repetition_path(word_id, how_many: @how_many)
     end
