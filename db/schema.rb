@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211124310) do
+ActiveRecord::Schema.define(version: 20171219134350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 20171211124310) do
     t.string "english", null: false
     t.string "polish_synonyms"
     t.string "english_synonyms"
-    t.string "sample_sentence"
     t.integer "packet_id", null: false
     t.bigint "learning_session_id"
     t.index ["english"], name: "index_words_on_english"
